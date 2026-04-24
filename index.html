@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nalegalu.org, Prawo dostępne dla ludzi i AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #1b2e4b;
+      --navy-mid:  #253d61;
+      --navy-light:#3a5278;
+      --cream:     #faf9f7;
+      --cream2:    #f3f1ec;
+      --white:     #ffffff;
+      --amber:     oklch(72% 0.16 72);
+      --amber-dark:oklch(60% 0.16 72);
+      --teal:      oklch(52% 0.13 192);
+      --teal-light:oklch(94% 0.05 192);
+      --text:      #1b2e4b;
+      --text-mid:  #3d5070;
+      --text-light:#6b7fa3;
+      --border:    #dde3ed;
+      --serif: 'Lora', Georgia, serif;
+      --sans:  'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* -- NAV -- */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,249,247,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--navy);
+    }
+    .nav-logo img { height: 36px; width: 36px; object-fit: contain; }
+    .nav-logo-text {
+      font-family: var(--serif);
+      font-size: 1.1rem; font-weight: 600; letter-spacing: -0.01em;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.875rem; font-weight: 500; color: var(--text-mid);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-cta {
+      background: var(--navy);
+      color: var(--white) !important;
+      padding: 8px 18px; border-radius: 6px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--navy-mid) !important; color: var(--white) !important; }
+
+    /* -- HERO -- */
+    .hero {
+      background: var(--navy);
+      color: var(--white);
+      padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem) clamp(4rem, 8vw, 7rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 75% 40%, oklch(52% 0.13 192 / 0.12) 0%, transparent 55%),
+        radial-gradient(circle at 20% 80%, oklch(72% 0.16 72 / 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 780px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: oklch(72% 0.16 72 / 0.15);
+      border: 1px solid oklch(72% 0.16 72 / 0.3);
+      color: var(--amber);
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 100px;
+      margin-bottom: 1.8rem;
+    }
+    .hero-eyebrow span { width: 6px; height: 6px; background: var(--amber); border-radius: 50%; display: inline-block; }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 700; line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      text-wrap: pretty;
+    }
+    .hero h1 em { font-style: italic; color: oklch(72% 0.16 72); }
+    .hero-lead {
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      color: oklch(85% 0.02 250);
+      max-width: 620px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--amber);
+      color: var(--navy);
+      font-weight: 600; font-size: 0.95rem;
+      padding: 14px 28px; border-radius: 8px; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--amber-dark); transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent;
+      color: var(--white);
+      font-weight: 500; font-size: 0.95rem;
+      padding: 14px 28px; border-radius: 8px; text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); }
+
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 2.5rem;
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .hero-stat .num {
+      font-family: var(--serif);
+      font-size: 2.2rem; font-weight: 700;
+      color: var(--white);
+      display: block; line-height: 1;
+    }
+    .hero-stat .num em { color: var(--amber); font-style: normal; }
+    .hero-stat .label {
+      font-size: 0.8rem; color: oklch(75% 0.03 250);
+      margin-top: 4px; letter-spacing: 0.03em;
+    }
+
+    /* -- SECTIONS COMMON -- */
+    section { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem); }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      font-weight: 600; line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+      text-wrap: pretty;
+    }
+    .section-lead {
+      font-size: 1.05rem; color: var(--text-mid); line-height: 1.75;
+      margin-top: 1rem;
+      max-width: 650px;
+    }
+
+    /* -- WHAT WE DO -- */
+    .what { background: var(--white); }
+    .what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem 4rem;
+      margin-top: 3.5rem;
+      align-items: start;
+    }
+    .what-block .what-num {
+      font-family: var(--serif);
+      font-size: 3rem; font-weight: 700;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .what-block h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem; font-weight: 600;
+      color: var(--navy); margin-bottom: 0.6rem;
+    }
+    .what-block p { font-size: 0.95rem; color: var(--text-mid); line-height: 1.7; }
+
+    .what-aside {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--teal);
+      border-radius: 10px;
+      padding: 1.8rem 2rem;
+      grid-column: span 2;
+    }
+    .what-aside p { font-size: 1rem; color: var(--text-mid); line-height: 1.75; }
+    .what-aside strong { color: var(--navy); }
+
+    /* -- FORMATS -- */
+    .formats { background: var(--cream); }
+    .formats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    .format-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2.2rem;
+      display: flex; flex-direction: column;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .format-card:hover { box-shadow: 0 8px 32px rgba(27,46,75,0.08); transform: translateY(-2px); }
+    .format-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.4rem;
+      font-size: 1.4rem;
+    }
+    .format-icon.code { background: oklch(94% 0.05 255); }
+    .format-icon.book { background: oklch(96% 0.06 72); }
+    .format-icon.audio { background: oklch(94% 0.05 192); }
+    .format-card h3 {
+      font-family: var(--serif);
+      font-size: 1.15rem; font-weight: 600;
+      color: var(--navy); margin-bottom: 0.3rem;
+    }
+    .format-card .format-sub {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-light); margin-bottom: 1rem;
+    }
+    .format-card p {
+      font-size: 0.92rem; color: var(--text-mid); line-height: 1.7; flex: 1;
+    }
+    .format-card .format-tags {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.2rem;
+    }
+    .tag {
+      font-size: 0.73rem; font-weight: 500; letter-spacing: 0.03em;
+      padding: 3px 10px; border-radius: 100px;
+      background: var(--cream2); color: var(--text-mid); border: 1px solid var(--border);
+    }
+    .format-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 1.4rem;
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--teal); text-decoration: none;
+      transition: gap 0.15s;
+    }
+    .format-link:hover { gap: 10px; }
+
+    /* -- WHY IT MATTERS -- */
+    .why { background: var(--navy); color: var(--white); }
+    .why .section-label { color: var(--amber); }
+    .why .section-title { color: var(--white); }
+    .why-body {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem 4rem; margin-top: 3.5rem;
+      align-items: start;
+    }
+    .why-text { font-size: 1.05rem; color: oklch(85% 0.03 250); line-height: 1.8; }
+    .why-text p + p { margin-top: 1.2em; }
+    .why-text strong { color: var(--white); }
+    .why-callout {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-left: 3px solid var(--amber);
+      border-radius: 10px;
+      padding: 2rem;
+    }
+    .why-callout blockquote {
+      font-family: var(--serif);
+      font-size: 1.25rem; font-style: italic;
+      color: var(--white); line-height: 1.6;
+    }
+    .why-callout .byline {
+      margin-top: 1rem;
+      font-size: 0.82rem; color: oklch(70% 0.04 250); letter-spacing: 0.03em;
+    }
+
+    /* -- STAY IN TOUCH -- */
+    .contact { background: var(--cream2); }
+    .contact-inner {
+      max-width: 600px; margin: 0 auto; text-align: center;
+    }
+    .contact-inner .section-title { margin: 0 auto 1rem; }
+    .contact-inner .section-lead { margin: 0 auto 2.5rem; }
+    .contact-form {
+      display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;
+    }
+    .contact-form input[type="email"] {
+      flex: 1; min-width: 240px;
+      padding: 13px 18px; border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      font-family: var(--sans); font-size: 0.95rem; color: var(--text);
+      outline: none; transition: border-color 0.2s;
+    }
+    .contact-form input[type="email"]::placeholder { color: var(--text-light); }
+    .contact-form input[type="email"]:focus { border-color: var(--teal); }
+    .contact-form button {
+      padding: 13px 26px; border-radius: 8px;
+      background: var(--navy); color: var(--white);
+      font-family: var(--sans); font-size: 0.95rem; font-weight: 600;
+      border: none; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .contact-form button:hover { background: var(--navy-mid); }
+    .contact-note {
+      margin-top: 1.2rem;
+      font-size: 0.82rem; color: var(--text-light);
+    }
+    .contact-success {
+      display: none;
+      background: var(--teal-light);
+      border: 1px solid oklch(52% 0.13 192 / 0.3);
+      border-radius: 10px; padding: 1.5rem;
+      color: oklch(30% 0.1 192);
+      font-weight: 500;
+    }
+
+    /* -- FOOTER -- */
+    footer {
+      background: var(--navy);
+      color: oklch(70% 0.04 250);
+      padding: 3rem clamp(1.5rem, 5vw, 4rem);
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      align-items: center; justify-content: space-between;
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--white);
+    }
+    .footer-logo img {
+      height: 32px; width: 32px; object-fit: contain;
+      filter: invert(1) brightness(2);
+    }
+    .footer-logo-text { font-family: var(--serif); font-size: 1rem; font-weight: 600; }
+    .footer-meta { font-size: 0.82rem; line-height: 1.7; }
+    .footer-meta a { color: oklch(70% 0.04 250); text-decoration: underline; text-underline-offset: 3px; }
+    .footer-meta a:hover { color: var(--white); }
+    .footer-links {
+      display: flex; flex-wrap: wrap; gap: 1.5rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.85rem; color: oklch(70% 0.04 250); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+
+    /* -- PODCAST BUTTONS -- */
+    .podcast-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.4rem; }
+    .podcast-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 14px; border-radius: 8px;
+      font-size: 0.82rem; font-weight: 600; text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .podcast-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .podcast-btn.apple { background: #000; color: #fff; }
+    .podcast-btn.spotify { background: #1DB954; color: #fff; }
+
+    /* -- SVG ICONS -- */
+    .icon-gh { display: inline-block; vertical-align: middle; }
+
+    /* -- RESPONSIVE -- */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .what-grid { grid-template-columns: 1fr; }
+      .what-aside { grid-column: span 1; }
+      .formats-grid { grid-template-columns: 1fr; }
+      .why-body { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="uploads/logo.jpeg" alt="nalegalu logo" />
+    <span class="nav-logo-text">nalegalu</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#co-robimy">Co robimy</a></li>
+    <li><a href="#formaty">Formaty</a></li>
+    <li><a href="#dlaczego">Dlaczego</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+    <li>
+      <a href="https://github.com/nalegaluorg/nalegalu" class="nav-cta" target="_blank" rel="noopener">
+        <svg class="icon-gh" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.607.069-.607 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        GitHub
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span></span> Wolne i otwarte dane prawne</div>
+    <h1>Prawo dostępne<br>dla <em>ludzi i AI</em></h1>
+    <p class="hero-lead">
+      Polskie prawo jest publiczne, ale ukryte w plikach PDF i nieporęcznych stronach rządowych.
+      Udostępniamy je w nowoczesnej, ustrukturyzowanej postaci: gotowej do przeszukiwania,
+      cytowania i integracji z narzędziami AI, z których korzystają prawnicy i obywatele.
+    </p>
+    <div class="hero-actions">
+      <a href="https://github.com/nalegaluorg/nalegalu" class="btn-primary" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.607.069-.607 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        Zobacz na GitHub
+      </a>
+      <a href="#co-robimy" class="btn-secondary">
+        Dowiedz się więcej
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="num">5 700<em>+</em></span>
+        <span class="label">aktów prawnych</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">1918<em>-</em>dziś</span>
+        <span class="label">zakres historyczny</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">CC0</span>
+        <span class="label">licencja, bez ograniczeń</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">auto</span>
+        <span class="label">aktualizacja danych</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="what" id="co-robimy">
+  <div class="section-inner">
+    <div class="section-label">Co robimy</div>
+    <h2 class="section-title">Ustawodawstwo jako dane,<br>nie jako skan</h2>
+    <p class="section-lead">
+      Pobieramy całe polskie prawodawstwo i orzecznictwo, a następnie udostępniamy je
+      w nowoczesnych formatach: ustrukturyzowanych, połączonych odniesieniami i gotowych do użycia.
+    </p>
+    <div class="what-grid">
+      <div class="what-block">
+        <div class="what-num">01</div>
+        <h3>Wszystkie akty prawne</h3>
+        <p>Ustaw, rozporządzeń i obwieszczeń z lat 1918-2025 jest ponad 5 700. Pobieramy je z Dziennika Ustaw i ISAP, normalizujemy strukturę i udostępniamy w czytelnych plikach.</p>
+      </div>
+      <div class="what-block">
+        <div class="what-num">02</div>
+        <h3>Orzecznictwo sądowe</h3>
+        <p>Wyroki i postanowienia sądów powszechnych, SN i TK, połączone z odpowiednimi artykułami ustaw, które interpretują. Kontekst prawny w jednym miejscu.</p>
+      </div>
+      <div class="what-block">
+        <div class="what-num">03</div>
+        <h3>Otwarte licencje</h3>
+        <p>Wszystkie dane publikujemy na licencji CC0, bez żadnych ograniczeń. Możesz je pobrać, użyć, zmodyfikować i dystrybuować w dowolnym celu, komercyjnym lub nie.</p>
+      </div>
+      <div class="what-block">
+        <div class="what-num">04</div>
+        <h3>Automatyczna aktualizacja</h3>
+        <p>Zmiany w prawie odzwierciedlają się w danych automatycznie. Żadnych przestarzałych wersji, narzędzia AI zawsze pracują na aktualnym stanie prawnym.</p>
+      </div>
+      <div class="what-aside">
+        <p>
+          <strong>Kiedy zadajesz AI pytanie prawne</strong>, model powinien cytować konkretny artykuł z obowiązującej ustawy, nie domyślać się treści przepisów.
+          Nalegalu dostarcza warstwę danych, która to umożliwia: prawdziwą, aktualną, otwartą.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATS -->
+<section class="formats" id="formaty">
+  <div class="section-inner">
+    <div class="section-label">Dostępne formaty</div>
+    <h2 class="section-title">Trzy sposoby korzystania z danych</h2>
+    <p class="section-lead">
+      Każdy format służy innemu odbiorcy, programiście, prawnikowi, studentowi
+      w drodze na uczelnię.
+    </p>
+    <div class="formats-grid">
+
+      <!-- Card 1 -->
+      <div class="format-card">
+        <div class="format-icon code">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="oklch(35% 0.12 255)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div class="format-sub">Markdown / AI-ready</div>
+        <h3>Dane dla deweloperów i AI</h3>
+        <p>
+          Ustrukturyzowane pliki Markdown z metadanymi, wzajemnymi odniesieniami między aktami
+          i orzecznictwem. Gotowe do RAG, fine-tuningu i okien kontekstowych LLM.
+        </p>
+        <div class="format-tags">
+          <span class="tag">RAG</span>
+          <span class="tag">Fine-tuning</span>
+          <span class="tag">JSON metadata</span>
+          <span class="tag">Cross-references</span>
+        </div>
+        <a href="https://github.com/nalegaluorg/nalegalu" class="format-link" target="_blank" rel="noopener">
+          Pobierz z GitHub
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="format-card">
+        <div class="format-icon book">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="oklch(50% 0.14 60)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="format-sub">E-booki</div>
+        <h3>Czytaj na Kindle i telefonie</h3>
+        <p>
+          Najpopularniejsze akty, Kodeks cywilny, KPC, KK i inne, jako starannie sformatowane
+          pliki EPUB i MOBI. Czytaj w dowolnym miejscu, bez połączenia z internetem.
+        </p>
+        <div class="format-tags">
+          <span class="tag">EPUB</span>
+          <span class="tag">MOBI / Kindle</span>
+          <span class="tag">Kodeks cywilny</span>
+          <span class="tag">KPC · KK</span>
+        </div>
+        <a href="#kontakt" class="format-link">
+          Powiadom mnie
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="format-card">
+        <div class="format-icon audio">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="oklch(38% 0.13 192)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+        </div>
+        <div class="format-sub">Podcast / Audio</div>
+        <h3>Słuchaj prawa</h3>
+        <p>
+          Najważniejsze akty prawne w formie audio, idealne na dojazdy, spacer, naukę.
+          Dostępność dla osób z dysfunkcją wzroku. Prawo dosłownie w zasięgu słuchu.
+        </p>
+        <div class="format-tags">
+          <span class="tag">MP3</span>
+          <span class="tag">Podcast RSS</span>
+          <span class="tag">Dostępność</span>
+        </div>
+        <div class="podcast-links">
+          <a href="https://podcasts.apple.com/us/podcast/nalegalu/id1892974960" class="podcast-btn apple" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Apple Podcasts
+          </a>
+          <a href="https://open.spotify.com/show/1HFNYVb5Md7ndxLxFkuGfz" class="podcast-btn spotify" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+            Spotify
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY IT MATTERS -->
+<section class="why" id="dlaczego">
+  <div class="section-inner">
+    <div class="section-label">Dlaczego to ważne</div>
+    <h2 class="section-title">AI już jest w salach sądowych.<br>Pytanie brzmi: z jakich źródeł korzysta.</h2>
+    <div class="why-body">
+      <div class="why-text">
+        <p>
+          Prawnicy, sędziowie i obywatele coraz częściej sięgają po narzędzia AI w pracy z prawem.
+          Asystenci prawni, chatboty, wyszukiwarki semantyczne, wszystkie potrzebują
+          <strong>rzetelnej bazy wiedzy</strong>, żeby działać poprawnie.
+        </p>
+        <p>
+          Problem w tym, że polskie prawo, choć technicznie publiczne, jest praktycznie
+          <strong>nieużywalne maszynowo</strong>: rozproszone w PDFach, bez ujednoliconej struktury,
+          bez odniesień między aktami. Modele językowe albo pomijają te dane, albo je halucynują.
+        </p>
+        <p>
+          Nalegalu rozwiązuje ten problem u źródła. Dostarczamy <strong>warstwę danych</strong>,
+          na której mogą polegać twórcy narzędzi prawnych, bezpłatnie, otwarcie, zawsze aktualnie.
+          To infrastruktura publiczna, bo na taką zasługuje prawo.
+        </p>
+      </div>
+      <div class="why-callout">
+        <blockquote>
+          "Prawo nie może być dobrem luksusowym. Jeśli rozumieją je tylko ci, którzy mogą za to zapłacić, coś jest nie tak."
+        </blockquote>
+        <div class="byline">Misja nalegalu.org</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAY IN TOUCH -->
+<section class="contact" id="kontakt">
+  <div class="section-inner">
+    <div class="contact-inner">
+      <div class="section-label">Bądź na bieżąco</div>
+      <h2 class="section-title">Śledź rozwój projektu</h2>
+      <p class="section-lead">
+        Podcast już działa, dane są na GitHubie. Zostaw e-mail, żeby nie przegapić nowych formatów i aktualizacji.
+      </p>
+      <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST" onsubmit="handleSubmit(event)">
+        <input type="email" name="email" placeholder="twój@email.pl" required aria-label="Adres e-mail" />
+        <input type="hidden" name="_subject" value="Nowy zapis - nalegalu.org" />
+        <input type="hidden" name="_next" value="" />
+        <input type="hidden" name="access_key" value="db1ed6a5-b60d-4b64-b68c-1a959f483049" />
+        <button type="submit">Zapisz się</button>
+      </form>
+      <div class="contact-success" id="successMsg">
+        Dziękujemy! Będziemy Cię informować o nowych formatach i aktualizacjach. Już teraz możesz zajrzeć na <a href="https://github.com/nalegaluorg/nalegalu" target="_blank" rel="noopener">GitHub</a> lub posłuchać podcastu na <a href="https://podcasts.apple.com/us/podcast/nalegalu/id1892974960" target="_blank" rel="noopener">Apple Podcasts</a> i <a href="https://open.spotify.com/show/1HFNYVb5Md7ndxLxFkuGfz" target="_blank" rel="noopener">Spotify</a>.
+      </div>
+      <p class="contact-note">Żadnego spamu. Możesz się wypisać w dowolnym momencie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="#" class="footer-logo">
+      <img src="uploads/logo.jpeg" alt="nalegalu" />
+      <span class="footer-logo-text">nalegalu.org</span>
+    </a>
+    <div class="footer-meta">
+      Dane na licencji <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0 1.0 Universal</a>, domena publiczna.<br>
+      Kod źródłowy: <a href="https://github.com/nalegaluorg/nalegalu" target="_blank" rel="noopener">github.com/nalegalu</a> · Kontakt: <a href="mailto:kontakt@nalegalu.org">kontakt@nalegalu.org</a>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#co-robimy">Co robimy</a></li>
+      <li><a href="#formaty">Formaty</a></li>
+      <li><a href="https://github.com/nalegaluorg/nalegalu" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="mailto:kontakt@nalegalu.org">Kontakt</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('contactForm');
+  const btn = form.querySelector('button');
+  btn.textContent = 'Wysyłam...';
+  btn.disabled = true;
+  try {
+    const data = new FormData(form);
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      form.style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    } else {
+      btn.textContent = 'Spróbuj ponownie';
+      btn.disabled = false;
+    }
+  } catch {
+    btn.textContent = 'Spróbuj ponownie';
+    btn.disabled = false;
+  }
+}
+
+// Smooth reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.style.opacity = '1';
+      el.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.format-card, .what-block, .why-callout').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
