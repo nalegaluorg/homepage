@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dokumentacja - nalegalu.org</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMEB28MEH6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZMEB28MEH6');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #1b2e4b;
+      --navy-mid:   #253d61;
+      --cream:      #faf9f7;
+      --cream2:     #f3f1ec;
+      --white:      #ffffff;
+      --amber:      oklch(72% 0.16 72);
+      --amber-dark: oklch(60% 0.16 72);
+      --teal:       oklch(52% 0.13 192);
+      --teal-light: oklch(94% 0.05 192);
+      --teal-mid:   oklch(85% 0.08 192);
+      --text:       #1b2e4b;
+      --text-mid:   #3d5070;
+      --text-light: #6b7fa3;
+      --border:     #dde3ed;
+      --border-mid: #c8d3e5;
+      --sidebar-w:  272px;
+      --topnav-h:   60px;
+      --serif:  'Lora', Georgia, serif;
+      --sans:   'Inter', system-ui, sans-serif;
+      --mono:   'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── TOP NAV ── */
+    .topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: var(--topnav-h);
+      background: rgba(250,249,247,0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 1.5rem;
+      gap: 1.5rem;
+    }
+    .topnav-logo {
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none; color: var(--navy);
+      flex-shrink: 0;
+    }
+    .topnav-logo img { height: 30px; width: 30px; object-fit: contain; border-radius: 6px; }
+    .topnav-logo-text { font-family: var(--serif); font-size: 1rem; font-weight: 600; }
+    .topnav-divider { width: 1px; height: 20px; background: var(--border); flex-shrink: 0; }
+    .topnav-section { font-size: 0.85rem; color: var(--text-light); font-weight: 500; }
+
+    .topnav-search { flex: 1; max-width: 380px; margin-left: auto; position: relative; }
+    .topnav-search svg {
+      position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+      color: var(--text-light); pointer-events: none;
+    }
+    .topnav-search input {
+      width: 100%;
+      padding: 7px 12px 7px 36px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: var(--sans); font-size: 0.875rem;
+      color: var(--text); background: var(--white);
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .topnav-search input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px oklch(52% 0.13 192 / 0.1);
+    }
+    .topnav-search input::placeholder { color: var(--text-light); }
+
+    .search-results {
+      display: none;
+      position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(27,46,75,0.12);
+      overflow: hidden; z-index: 300;
+      max-height: 380px; overflow-y: auto;
+    }
+    .search-results.open { display: block; }
+    .search-result-item {
+      display: block; padding: 10px 14px;
+      text-decoration: none; color: var(--text);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-item:hover { background: var(--cream); }
+    .search-result-item .sr-section { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--teal); margin-bottom: 2px; }
+    .search-result-item .sr-title { font-size: 0.875rem; font-weight: 500; color: var(--navy); }
+    .search-result-item .sr-excerpt { font-size: 0.78rem; color: var(--text-light); margin-top: 2px; line-height: 1.4; }
+    .search-no-results { padding: 16px 14px; color: var(--text-light); font-size: 0.875rem; }
+
+    .topnav-links { display: flex; align-items: center; gap: 1rem; margin-left: 1rem; flex-shrink: 0; }
+    .topnav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+    .topnav-links a:hover { color: var(--navy); }
+    .topnav-btn {
+      background: var(--navy); color: var(--white) !important;
+      padding: 7px 16px; border-radius: 6px; font-size: 0.82rem !important;
+      transition: background 0.2s;
+    }
+    .topnav-btn:hover { background: var(--navy-mid) !important; }
+
+    /* ── LAYOUT ── */
+    .docs-layout { display: flex; padding-top: var(--topnav-h); min-height: 100vh; }
+
+    .sidebar {
+      width: var(--sidebar-w); flex-shrink: 0;
+      position: fixed; top: var(--topnav-h); bottom: 0; left: 0;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--cream);
+      padding: 1.5rem 0 3rem;
+      scrollbar-width: thin;
+    }
+    .sidebar-group { margin-bottom: 0.25rem; }
+    .sidebar-group-label {
+      padding: 0.6rem 1.25rem 0.3rem;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .sidebar-link {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 1.25rem;
+      font-size: 0.875rem; color: var(--text-mid);
+      text-decoration: none;
+      transition: color 0.15s, background 0.15s;
+      position: relative;
+    }
+    .sidebar-link:hover { color: var(--navy); background: oklch(88% 0.04 250 / 0.4); }
+    .sidebar-link.active {
+      color: var(--teal); background: var(--teal-light); font-weight: 500;
+    }
+    .sidebar-link.active::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: var(--teal); border-radius: 0 2px 2px 0;
+    }
+    .sidebar-link svg { flex-shrink: 0; }
+    .sidebar-badge {
+      margin-left: auto;
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.04em;
+      padding: 2px 7px; border-radius: 100px;
+      background: oklch(72% 0.16 72 / 0.15); color: var(--amber-dark);
+    }
+    .sidebar-sep { height: 1px; background: var(--border); margin: 0.75rem 1.25rem; }
+
+    .docs-main { margin-left: var(--sidebar-w); flex: 1; display: flex; }
+    .docs-content { flex: 1; max-width: 760px; padding: 3rem 3rem 6rem; }
+
+    .docs-toc {
+      width: 220px; flex-shrink: 0;
+      position: sticky; top: calc(var(--topnav-h) + 2rem);
+      align-self: flex-start;
+      padding: 0 1.5rem 0 2rem;
+      display: block;
+    }
+    .toc-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-light); margin-bottom: 0.75rem;
+    }
+    .toc-list { list-style: none; }
+    .toc-list a {
+      display: block;
+      font-size: 0.8rem; color: var(--text-light);
+      text-decoration: none; padding: 4px 0 4px 12px;
+      border-left: 2px solid var(--border);
+      transition: color 0.15s, border-color 0.15s;
+      line-height: 1.4;
+    }
+    .toc-list a:hover, .toc-list a.active { color: var(--teal); border-left-color: var(--teal); }
+    .toc-list .toc-sub a { font-size: 0.75rem; padding-left: 20px; }
+
+    .doc-section { display: none; }
+    .doc-section.visible { display: block; }
+
+    .breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; color: var(--text-light); margin-bottom: 2rem;
+    }
+    .breadcrumb a { color: var(--text-light); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--teal); }
+    .breadcrumb svg { color: var(--border); }
+
+    .doc-eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 0.6rem;
+    }
+    .doc-title {
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 3vw, 2.2rem);
+      font-weight: 700; line-height: 1.15;
+      letter-spacing: -0.02em; color: var(--navy);
+      margin-bottom: 0.75rem; text-wrap: pretty;
+    }
+    .doc-lead {
+      font-size: 1.05rem; color: var(--text-mid); line-height: 1.75;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem; border-bottom: 1px solid var(--border);
+    }
+
+    h2.doc-h2 {
+      font-family: var(--serif);
+      font-size: 1.35rem; font-weight: 600;
+      color: var(--navy); margin-top: 2.5rem; margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+      scroll-margin-top: calc(var(--topnav-h) + 1rem);
+    }
+    h3.doc-h3 {
+      font-family: var(--sans);
+      font-size: 1rem; font-weight: 600;
+      color: var(--navy); margin-top: 1.75rem; margin-bottom: 0.5rem;
+      scroll-margin-top: calc(var(--topnav-h) + 1rem);
+    }
+    .doc-p { font-size: 0.95rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 1rem; }
+    .doc-p strong { color: var(--text); font-weight: 600; }
+    .doc-ul, .doc-ol { padding-left: 1.25rem; margin-bottom: 1rem; }
+    .doc-ul li, .doc-ol li { font-size: 0.95rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 0.3rem; }
+    .doc-ul li strong, .doc-ol li strong { color: var(--text); }
+
+    code.inline {
+      font-family: var(--mono); font-size: 0.85em;
+      background: rgba(0,0,0,0.06); padding: 1px 6px; border-radius: 4px;
+      color: var(--navy);
+    }
+
+    /* Steps */
+    .steps { margin: 1.25rem 0; }
+    .step { display: flex; gap: 1rem; margin-bottom: 1.25rem; align-items: flex-start; }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--navy); color: var(--white);
+      font-size: 0.78rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+    .step-body { flex: 1; }
+    .step-body strong { font-size: 0.95rem; color: var(--navy); display: block; margin-bottom: 2px; }
+    .step-body p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; margin: 0; }
+
+    /* Code block */
+    .code-block { background: #0f1724; border-radius: 10px; margin: 1.25rem 0; overflow: hidden; }
+    .code-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .code-lang { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(65% 0.1 192); }
+    .code-copy {
+      font-size: 0.72rem; color: rgba(255,255,255,0.4);
+      background: none; border: none; cursor: pointer; padding: 2px 6px;
+      border-radius: 4px; transition: color 0.15s, background 0.15s;
+      font-family: var(--sans);
+    }
+    .code-copy:hover { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.08); }
+    .code-block pre {
+      padding: 1.1rem 1.25rem;
+      overflow-x: auto;
+      font-family: var(--mono); font-size: 0.83rem; line-height: 1.7;
+      color: oklch(82% 0.05 250);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .code-block pre .c-comment { color: oklch(55% 0.05 250); }
+    .code-block pre .c-string  { color: oklch(75% 0.14 150); }
+
+    /* Callouts */
+    .callout {
+      border-radius: 8px; padding: 1rem 1.25rem;
+      margin: 1.25rem 0; font-size: 0.9rem; line-height: 1.65;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .callout svg { flex-shrink: 0; margin-top: 2px; }
+    .callout-body strong { display: block; font-weight: 600; margin-bottom: 2px; }
+    .callout-body p { margin: 0; }
+    .callout.info { background: oklch(94% 0.05 192); border-left: 3px solid var(--teal); color: oklch(28% 0.1 192); }
+    .callout.warning { background: oklch(97% 0.06 72); border-left: 3px solid var(--amber); color: oklch(35% 0.1 60); }
+    .callout.tip { background: oklch(96% 0.04 150); border-left: 3px solid oklch(55% 0.14 150); color: oklch(28% 0.1 150); }
+
+    /* Tool cards */
+    .tool-cards { display: grid; grid-template-columns: 1fr; gap: 1rem; margin: 1.5rem 0; }
+    .tool-card {
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      text-decoration: none; color: inherit;
+      display: block;
+    }
+    .tool-card:hover { box-shadow: 0 4px 16px rgba(27,46,75,0.07); border-color: var(--teal-mid); }
+    .tool-card.disabled {
+      background: var(--cream2); border-style: dashed; cursor: default; opacity: 0.85;
+    }
+    .tool-card.disabled:hover { box-shadow: none; border-color: var(--border-mid); }
+    .tool-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 0.5rem; }
+    .tool-icon {
+      width: 38px; height: 38px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      background: oklch(95% 0.05 192);
+    }
+    .tool-card h4 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--navy); }
+    .tool-card .badge {
+      margin-left: auto; font-size: 0.68rem; font-weight: 600; padding: 2px 8px;
+      border-radius: 100px;
+    }
+    .badge.ready    { background: oklch(92% 0.08 150); color: oklch(35% 0.12 150); }
+    .badge.soon     { background: oklch(96% 0.06 72); color: oklch(40% 0.12 60); }
+    .tool-card p { font-size: 0.875rem; color: var(--text-mid); line-height: 1.6; margin: 0; }
+
+    /* Prompt cards */
+    .prompt-category { margin-top: 2.5rem; }
+    .prompt-category-title {
+      font-family: var(--serif); font-size: 1.2rem; font-weight: 600;
+      color: var(--navy); margin-bottom: 0.25rem;
+      scroll-margin-top: calc(var(--topnav-h) + 1rem);
+    }
+    .prompt-category-desc { font-size: 0.875rem; color: var(--text-light); margin-bottom: 1rem; }
+    .prompt-item {
+      border: 1px solid var(--border); border-radius: 10px;
+      margin-bottom: 1rem; overflow: hidden;
+      background: var(--white);
+    }
+    .prompt-item-header {
+      padding: 0.85rem 1.1rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--cream);
+    }
+    .prompt-item-title {
+      font-size: 0.95rem; font-weight: 600; color: var(--navy);
+      margin-bottom: 2px;
+    }
+    .prompt-item-purpose { font-size: 0.82rem; color: var(--text-mid); line-height: 1.5; }
+    .prompt-item .code-block { margin: 0; border-radius: 0; }
+
+    /* Community CTA */
+    .community-cta {
+      border: 1px dashed var(--border-mid);
+      border-radius: 10px;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--cream2) 100%);
+      margin-top: 2.5rem;
+      text-align: center;
+    }
+    .community-cta h4 { font-family: var(--serif); font-size: 1.1rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .community-cta p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.65; max-width: 540px; margin: 0 auto 1rem; }
+    .community-cta .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--navy); color: var(--white);
+      padding: 8px 16px; border-radius: 6px;
+      text-decoration: none; font-size: 0.85rem; font-weight: 500;
+      transition: background 0.2s;
+    }
+    .community-cta .btn:hover { background: var(--navy-mid); }
+
+    /* Pagination */
+    .doc-pagination {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .page-btn {
+      display: flex; flex-direction: column; gap: 4px;
+      padding: 14px 18px; border-radius: 8px;
+      border: 1px solid var(--border); text-decoration: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      max-width: 48%;
+    }
+    .page-btn:hover { border-color: var(--teal); box-shadow: 0 2px 8px rgba(27,46,75,0.06); }
+    .page-btn.next { text-align: right; margin-left: auto; }
+    .page-btn .pb-label { font-size: 0.72rem; color: var(--text-light); font-weight: 500; }
+    .page-btn .pb-title { font-size: 0.9rem; font-weight: 600; color: var(--navy); }
+
+    .sidebar-toggle {
+      display: none;
+      background: none; border: 1px solid var(--border); border-radius: 6px;
+      padding: 5px 8px; cursor: pointer; color: var(--navy);
+      margin-right: 0.5rem;
+    }
+    .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 150; }
+
+    /* Quick start hero */
+    .quickstart-hero {
+      background: linear-gradient(135deg, var(--cream) 0%, var(--teal-light) 100%);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0 2rem;
+      border: 1px solid var(--teal-mid);
+    }
+    .quickstart-hero h3 {
+      font-family: var(--serif); font-size: 1.15rem; color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .quickstart-hero p { font-size: 0.92rem; color: var(--text-mid); margin-bottom: 1rem; line-height: 1.65; }
+    .quickstart-steps {
+      display: flex; gap: 0.75rem; flex-wrap: wrap;
+    }
+    .quickstart-step {
+      flex: 1; min-width: 140px;
+      background: var(--white);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      font-size: 0.82rem; color: var(--text-mid);
+      border: 1px solid var(--border);
+    }
+    .quickstart-step .qs-num {
+      display: inline-block;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--teal); color: var(--white);
+      font-size: 0.72rem; font-weight: 700;
+      text-align: center; line-height: 22px;
+      margin-bottom: 0.4rem;
+    }
+    .quickstart-step strong { display: block; color: var(--navy); font-size: 0.88rem; margin-bottom: 2px; }
+
+    /* Inline anchor list (prompt index) */
+    .prompt-index {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.5rem; margin: 1.25rem 0 2rem;
+    }
+    .prompt-index a {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.83rem; color: var(--text-mid);
+      text-decoration: none;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .prompt-index a:hover { border-color: var(--teal); color: var(--teal); }
+
+    .page-disclaimer {
+      margin-top: 2.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px dashed var(--border);
+      font-size: 0.72rem;
+      color: var(--text-light);
+      line-height: 1.55;
+      font-style: italic;
+    }
+    @media (max-width: 1100px) {
+      .docs-toc { display: none; }
+      .docs-content { max-width: 100%; }
+    }
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; z-index: 160; }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-overlay.open { display: block; }
+      .sidebar-toggle { display: flex; align-items: center; }
+      .docs-main { margin-left: 0; }
+      .docs-content { padding: 2rem 1.25rem 4rem; }
+      .topnav-links { display: none; }
+      .topnav-search { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="topnav">
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <a href="index.html" class="topnav-logo">
+    <img src="uploads/logo.jpeg" alt="nalegalu" />
+    <span class="topnav-logo-text">nalegalu</span>
+  </a>
+  <div class="topnav-divider"></div>
+  <span class="topnav-section">Dokumentacja</span>
+
+  <div class="topnav-search">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Szukaj w dokumentacji..." autocomplete="off" />
+    <div class="search-results" id="searchResults"></div>
+  </div>
+
+  <div class="topnav-links">
+    <a href="index.html">Strona główna</a>
+    <a href="https://github.com/nalegaluorg/nalegalu" target="_blank" rel="noopener" class="topnav-btn">GitHub</a>
+  </div>
+</nav>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="docs-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-group">
+      <div class="sidebar-group-label">Wprowadzenie</div>
+      <a href="#" class="sidebar-link active" data-section="intro" onclick="showSection('intro',this);return false;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        Od czego zacząć
+      </a>
+    </div>
+
+    <div class="sidebar-sep"></div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-group-label">Konfiguracja narzędzi</div>
+      <a href="#" class="sidebar-link" data-section="claude-cowork" onclick="showSection('claude-cowork',this);return false;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+        Claude Cowork
+      </a>
+      <a href="#" class="sidebar-link" data-section="inne-narzedzia" onclick="showSection('inne-narzedzia',this);return false;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Inne narzędzia <span class="sidebar-badge">wkrótce</span>
+      </a>
+    </div>
+
+    <div class="sidebar-sep"></div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-group-label">Naucz AI nalegalu</div>
+      <a href="#" class="sidebar-link" data-section="instrukcje-projektu" onclick="showSection('instrukcje-projektu',this);return false;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Instrukcje projektu
+      </a>
+      <a href="#" class="sidebar-link" data-section="zasady-pracy" onclick="showSection('zasady-pracy',this);return false;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Zasady dobrej pracy
+      </a>
+    </div>
+
+    <div class="sidebar-sep"></div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-group-label">Biblioteka promptów</div>
+      <a href="#" class="sidebar-link" data-section="prompty" onclick="showSection('prompty',this);return false;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Gotowe prompty
+      </a>
+    </div>
+
+    <div class="sidebar-sep"></div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-group-label">Pomoc</div>
+      <a href="#" class="sidebar-link" data-section="problemy" onclick="showSection('problemy',this);return false;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Rozwiązywanie problemów
+      </a>
+      <a href="#" class="sidebar-link" data-section="wkład" onclick="showSection('wklad',this);return false;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Wkład społeczności
+      </a>
+    </div>
+  </aside>
+
+  <div class="docs-main">
+    <div class="docs-content" id="docsContent">
+
+      <!-- ═══ INTRO ═══ -->
+      <div class="doc-section visible" id="sec-intro">
+        <div class="breadcrumb">
+          <a href="index.html">nalegalu.org</a>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <span>Dokumentacja</span>
+        </div>
+        <div class="doc-eyebrow">Wprowadzenie</div>
+        <h1 class="doc-title">Od czego zacząć</h1>
+        <p class="doc-lead">Ta dokumentacja jest dla prawników i studentów prawa. Pokazuje krok po kroku, jak ustawić narzędzie AI do pracy z bazą nalegalu, jak nauczyć je prawidłowego korzystania z bazy, oraz daje gotowe prompty do codziennej pracy.</p>
+
+        <div class="quickstart-hero">
+          <h3>Trzy kroki do pracy z nalegalu</h3>
+          <p>Niezależnie od poziomu zaawansowania technicznego, droga jest taka sama:</p>
+          <div class="quickstart-steps">
+            <div class="quickstart-step">
+              <span class="qs-num">1</span>
+              <strong>Skonfiguruj narzędzie</strong>
+              Pobierz Claude Cowork i wskaż folder bazy.
+            </div>
+            <div class="quickstart-step">
+              <span class="qs-num">2</span>
+              <strong>Naucz AI bazy</strong>
+              Wklej instrukcje projektu — AI zrozumie strukturę.
+            </div>
+            <div class="quickstart-step">
+              <span class="qs-num">3</span>
+              <strong>Używaj promptów</strong>
+              Skopiuj gotowy prompt z biblioteki i pracuj.
+            </div>
+          </div>
+        </div>
+
+        <h2 class="doc-h2" id="dla-kogo">Dla kogo jest ta dokumentacja</h2>
+        <p class="doc-p">Dokumentacja jest pisana dla osób, które <strong>nie są programistami</strong> — prawników w kancelariach, sędziów, aplikantów, studentów prawa. Nie zakłada znajomości GitHuba, terminala ani wiedzy technicznej. Każdy krok jest opisany od początku, z odnośnikami i przykładami.</p>
+
+        <h2 class="doc-h2" id="co-w-srodku">Co znajdziesz w dokumentacji</h2>
+        <ul class="doc-ul">
+          <li><strong>Konfiguracja narzędzi</strong> — jak pobrać i ustawić Claude Cowork, by widział pliki nalegalu. W przyszłości tę sekcję rozbudujemy o kolejne narzędzia (np. Cursor, ChatGPT z plikami, Obsidian).</li>
+          <li><strong>Naucz AI nalegalu</strong> — gotowe instrukcje projektu, które wklejasz raz, a AI zaczyna prawidłowo korzystać z bazy: weryfikuje sygnatury, sprawdza status aktów, nie halucynuje.</li>
+          <li><strong>Biblioteka promptów</strong> — gotowe szablony zapytań do typowych zadań: analiza przepisu, badanie orzecznictwa, pisma procesowe, nauka. Lista jest rozwijana wspólnie ze społecznością.</li>
+          <li><strong>Rozwiązywanie problemów</strong> — co robić, gdy AI nie widzi plików, halucynuje sygnatury lub daje zbyt ogólne odpowiedzi.</li>
+        </ul>
+
+        <div class="callout info">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="callout-body">
+            <strong>Zacznij od Claude Cowork</strong>
+            <p>To obecnie najwygodniejsze narzędzie do pracy z bazą nalegalu. Cała konfiguracja zajmuje około 15 minut — po jednorazowym ustawieniu pracujesz w czacie jak z normalnym asystentem, tylko z dostępem do całej bazy prawa.</p>
+          </div>
+        </div>
+
+        <div class="doc-pagination">
+          <div></div>
+          <a href="#" class="page-btn next" onclick="showSection('claude-cowork', document.querySelector('[data-section=claude-cowork]'));return false;">
+            <span class="pb-label">Następna strona</span>
+            <span class="pb-title">Claude Cowork →</span>
+          </a>
+        </div>
+        <p class="page-disclaimer">To nie jest oficjalne źródło prawa. Jedynym autentycznym źródłem jest Dziennik Ustaw publikowany na <a href="https://isap.sejm.gov.pl" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">isap.sejm.gov.pl</a>. Teksty są generowane automatycznie z PDF-ów ISAP i mogą zawierać błędy ekstrakcji.</p>
+      </div>
+
+      <!-- ═══ CLAUDE COWORK ═══ -->
+      <div class="doc-section" id="sec-claude-cowork">
+        <div class="breadcrumb">
+          <a href="index.html">nalegalu.org</a>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <span>Konfiguracja narzędzi</span>
+        </div>
+        <div class="doc-eyebrow">Konfiguracja narzędzi</div>
+        <h1 class="doc-title">Claude Cowork — krok po kroku</h1>
+        <p class="doc-lead">Pełna instrukcja: od pobrania aplikacji do pierwszego pytania prawnego. Po tej konfiguracji Claude będzie miał dostęp do całej bazy nalegalu i sam wybierał odpowiednie pliki, gdy zadasz pytanie.</p>
+
+        <h2 class="doc-h2" id="cc-co-to">Co to jest Claude Cowork?</h2>
+        <p class="doc-p">Claude Cowork to tryb w aplikacji desktopowej Claude (od firmy Anthropic), który pozwala wskazać folder z plikami na Twoim komputerze. Claude „widzi" te pliki i może je czytać, przeszukiwać, porównywać i analizować — bez ręcznego kopiowania i wklejania.</p>
+        <p class="doc-p">Dla prawnika oznacza to: wskazujesz folder nalegalu, zadajesz pytanie, a Claude sam otwiera odpowiednie akty prawne i orzecznictwo, szuka przepisów, porównuje linie orzecznicze i przygotowuje analizę.</p>
+
+        <h2 class="doc-h2" id="cc-wymagania">Wymagania</h2>
+        <ul class="doc-ul">
+          <li>Komputer z systemem <strong>macOS</strong> lub <strong>Windows</strong></li>
+          <li>Konto na <a href="https://claude.ai" target="_blank" rel="noopener" style="color:var(--teal)">claude.ai</a> (darmowe konto wystarczy na początek; plan Pro daje więcej wiadomości dziennie)</li>
+          <li>Około <strong>1 GB</strong> wolnego miejsca na dysku (na pliki nalegalu)</li>
+        </ul>
+
+        <h2 class="doc-h2" id="cc-krok1">Krok 1: Pobierz pliki nalegalu</h2>
+        <p class="doc-p">Musisz mieć kopię bazy nalegalu na swoim komputerze. Są dwa sposoby — wybierz prostszy.</p>
+
+        <h3 class="doc-h3">Opcja A — Pobierz ZIP (zalecane dla początkujących)</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Wejdź na repozytorium nalegalu</strong><p><a href="https://github.com/nalegaluorg/nalegalu" target="_blank" rel="noopener" style="color:var(--teal)">github.com/nalegaluorg/nalegalu</a></p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Kliknij zielony przycisk Code</strong><p>W prawym górnym rogu listy plików — następnie wybierz <strong>Download ZIP</strong>.</p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Rozpakuj archiwum</strong><p>Do wybranego folderu, np. <code class="inline">Dokumenty/nalegalu</code>.</p></div></div>
+        </div>
+
+        <h3 class="doc-h3">Opcja B — Git clone (zaawansowane)</h3>
+        <p class="doc-p">Jeśli masz zainstalowanego gita, jedna komenda. Zaletą jest łatwa aktualizacja: zamiast ponownego pobierania ZIP-a, używasz <code class="inline">git pull</code>.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Terminal</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+          <pre>git clone https://github.com/nalegaluorg/nalegalu.git ~/Documents/nalegalu</pre>
+        </div>
+
+        <h2 class="doc-h2" id="cc-krok2">Krok 2: Zainstaluj Claude Desktop</h2>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Wejdź na claude.ai/download</strong><p><a href="https://claude.ai/download" target="_blank" rel="noopener" style="color:var(--teal)">claude.ai/download</a></p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Pobierz wersję na swój system</strong><p>macOS lub Windows.</p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Zainstaluj i otwórz aplikację</strong><p>Zaloguj się swoim kontem claude.ai.</p></div></div>
+        </div>
+
+        <h2 class="doc-h2" id="cc-krok3">Krok 3: Utwórz projekt i wskaż folder</h2>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Otwórz Cowork</strong><p>W Claude Desktop kliknij <strong>Cowork</strong> w lewym panelu.</p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Utwórz nowy projekt</strong><p>Kliknij <strong>Nowy projekt</strong> (lub „New project").</p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Nadaj nazwę</strong><p>Np. „Prawo — nalegalu".</p></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Wskaż folder nalegalu</strong><p>Kliknij <strong>Wybierz folder</strong> i wskaż folder, do którego rozpakowałeś nalegalu (np. <code class="inline">Dokumenty/nalegalu</code>).</p></div></div>
+          <div class="step"><div class="step-num">5</div><div class="step-body"><strong>Sprawdź potwierdzenie</strong><p>Claude wyświetli komunikat, że ma dostęp do plików.</p></div></div>
+        </div>
+
+        <h2 class="doc-h2" id="cc-krok4">Krok 4: Wklej instrukcje projektu</h2>
+        <p class="doc-p">To <strong>najważniejszy krok</strong>. Instrukcje projektu to stały kontekst, który Claude otrzymuje na początku każdej rozmowy. Bez nich AI nie wie, czym są te pliki, jak są zorganizowane, jakie ma znaczenie pole „status" we frontmatter, ani że nie wolno halucynować sygnatur.</p>
+
+        <div class="callout tip">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <div class="callout-body">
+            <strong>Gotowe instrukcje znajdziesz w sekcji „Naucz AI nalegalu"</strong>
+            <p>Przejdź do <a href="#" onclick="showSection('instrukcje-projektu', document.querySelector('[data-section=instrukcje-projektu]'));return false;" style="color:var(--teal)">Instrukcje projektu</a>, skopiuj cały tekst i wklej w polu „Instrukcje" (lub „Project instructions") w ustawieniach projektu. Zapisz.</p>
+          </div>
+        </div>
+
+        <h2 class="doc-h2" id="cc-krok5">Krok 5: Pierwszy test</h2>
+        <p class="doc-p">Otwórz nową rozmowę w projekcie i wpisz:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Test konfiguracji</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+          <pre>Znajdź treść art. 415 Kodeksu cywilnego i pokaż 5 najważniejszych
+orzeczeń SN, które go dotyczą. Podaj sygnatury i daty.</pre>
+        </div>
+        <p class="doc-p">Claude powinien:</p>
+        <ol class="doc-ol">
+          <li>Otworzyć <code class="inline">prawo-cywilne/WDU19640160093/index.md</code> i znaleźć art. 415</li>
+          <li>Sprawdzić <code class="inline">prawo-cywilne/WDU19640160093/orzecznictwo/art-415.csv</code></li>
+          <li>Wybrać orzeczenia z najwyższym score</li>
+          <li>Podać treść artykułu plus sygnatury z datami</li>
+        </ol>
+        <p class="doc-p">Jeśli odpowiedź zawiera konkretne sygnatury i daty z plików — konfiguracja działa. Możesz przejść do biblioteki promptów.</p>
+
+        <div class="doc-pagination">
+          <a href="#" class="page-btn" onclick="showSection('intro', document.querySelector('[data-section=intro]'));return false;">
+            <span class="pb-label">← Poprzednia strona</span>
+            <span class="pb-title">Od czego zacząć</span>
+          </a>
+          <a href="#" class="page-btn next" onclick="showSection('inne-narzedzia', document.querySelector('[data-section=inne-narzedzia]'));return false;">
+            <span class="pb-label">Następna strona</span>
+            <span class="pb-title">Inne narzędzia →</span>
+          </a>
+        </div>
+        <p class="page-disclaimer">To nie jest oficjalne źródło prawa. Jedynym autentycznym źródłem jest Dziennik Ustaw publikowany na <a href="https://isap.sejm.gov.pl" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">isap.sejm.gov.pl</a>. Teksty są generowane automatycznie z PDF-ów ISAP i mogą zawierać błędy ekstrakcji.</p>
+      </div>
+
+      <!-- ═══ INNE NARZĘDZIA ═══ -->
+      <div class="doc-section" id="sec-inne-narzedzia">
+        <div class="breadcrumb">
+          <a href="index.html">nalegalu.org</a>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <span>Konfiguracja narzędzi</span>
+        </div>
+        <div class="doc-eyebrow">Konfiguracja narzędzi</div>
+        <h1 class="doc-title">Inne narzędzia AI</h1>
+        <p class="doc-lead">Claude Cowork to obecnie najwygodniejsze rozwiązanie. Pracujemy nad instrukcjami dla kolejnych narzędzi — będą dodawane w tej sekcji w miarę jak społeczność prawnicza będzie ich używać.</p>
+
+        <h2 class="doc-h2" id="planowane">Planowane instrukcje</h2>
+
+        <div class="tool-cards">
+          <div class="tool-card disabled">
+            <div class="tool-card-header">
+              <div class="tool-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="oklch(45% 0.12 192)" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              </div>
+              <h4>Obsidian</h4>
+              <span class="badge soon">w przygotowaniu</span>
+            </div>
+            <p>Darmowy edytor Markdown z lokalnym indeksowaniem. Idealny do przeglądania bazy bez AI lub do pracy z wtyczkami AI (Copilot, Smart Connections). Działa offline.</p>
+          </div>
+
+          <div class="tool-card disabled">
+            <div class="tool-card-header">
+              <div class="tool-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="oklch(45% 0.12 192)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <h4>ChatGPT z projektami</h4>
+              <span class="badge soon">w przygotowaniu</span>
+            </div>
+            <p>Konfiguracja projektów ChatGPT z plikami nalegalu jako załącznikami. Wymaga planu Plus, ale jest dostępne dla osób, które już używają ChatGPT.</p>
+          </div>
+
+          <div class="tool-card disabled">
+            <div class="tool-card-header">
+              <div class="tool-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="oklch(45% 0.12 192)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <h4>Cursor</h4>
+              <span class="badge soon">w przygotowaniu</span>
+            </div>
+            <p>Edytor z wbudowanym AI — może analizować wszystkie pliki nalegalu jednocześnie. Bardziej zaawansowany, ale daje pełną kontrolę nad kontekstem.</p>
+          </div>
+        </div>
+
+        <div class="callout info">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="callout-body">
+            <strong>Używasz innego narzędzia?</strong>
+            <p>Jeśli skonfigurowałeś inne narzędzie do pracy z nalegalu i chciałbyś podzielić się instrukcją ze społecznością — napisz na <a href="mailto:asia@nalegalu.org" style="color:var(--teal)">kontakt@nalegalu.org</a> lub zgłoś przez Issues na GitHubie.</p>
+          </div>
+        </div>
+
+        <div class="doc-pagination">
+          <a href="#" class="page-btn" onclick="showSection('claude-cowork', document.querySelector('[data-section=claude-cowork]'));return false;">
+            <span class="pb-label">← Poprzednia strona</span>
+            <span class="pb-title">Claude Cowork</span>
+          </a>
+          <a href="#" class="page-btn next" onclick="showSection('instrukcje-projektu', document.querySelector('[data-section=instrukcje-projektu]'));return false;">
+            <span class="pb-label">Następna strona</span>
+            <span class="pb-title">Instrukcje projektu →</span>
+          </a>
+        </div>
+        <p class="page-disclaimer">To nie jest oficjalne źródło prawa. Jedynym autentycznym źródłem jest Dziennik Ustaw publikowany na <a href="https://isap.sejm.gov.pl" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">isap.sejm.gov.pl</a>. Teksty są generowane automatycznie z PDF-ów ISAP i mogą zawierać błędy ekstrakcji.</p>
+      </div>
+
+      <!-- ═══ INSTRUKCJE PROJEKTU ═══ -->
+      <div class="doc-section" id="sec-instrukcje-projektu">
+        <div class="breadcrumb">
+          <a href="index.html">nalegalu.org</a>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <span>Naucz AI nalegalu</span>
+        </div>
+        <div class="doc-eyebrow">Naucz AI nalegalu</div>
+        <h1 class="doc-title">Instrukcje projektu</h1>
+        <p class="doc-lead">Gotowy tekst do wklejenia w pole „Instrukcje" w ustawieniach projektu Claude Cowork. Sprawia, że AI rozumie strukturę bazy, wie jak czytać orzecznictwo, sprawdza status aktów i nie zmyśla sygnatur.</p>
+
+        <div class="callout warning">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <div class="callout-body">
+            <strong>To jest najważniejszy krok</strong>
+            <p>Bez tych instrukcji AI nie wie, jak prawidłowo korzystać z bazy. Halucynacje sygnatur, pominięcie orzecznictwa SN, cytowanie uchylonych przepisów — wszystkiemu temu zapobiegają instrukcje poniżej.</p>
+          </div>
+        </div>
+
+        <h2 class="doc-h2" id="ip-tekst">Tekst instrukcji do wklejenia</h2>
+        <p class="doc-p">Skopiuj cały tekst z bloku poniżej i wklej w polu <strong>Instrukcje</strong> w ustawieniach projektu Claude Cowork (Ustawienia projektu → Instrukcje / Project instructions). Zapisz zmiany.</p>
+
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Instrukcje projektu — pełny tekst</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+          <pre>To jest baza polskiego prawa nalegalu.
+
+STRUKTURA PLIKÓW:
+- Katalogi tematyczne (prawo-cywilne/, prawo-karne/, prawo-pracy/ itd.)
+  zawierają podkatalogi poszczególnych aktów prawnych.
+- Każdy akt ma katalog o nazwie będącej adresem ISAP
+  (np. WDU19640160093 = Kodeks cywilny).
+- index.md — pełny tekst aktu w markdown z frontmatter YAML
+  (tytuł, status, ELI).
+- orzecznictwo.md — indeks orzeczeń sądowych powiązanych z tym aktem,
+  pogrupowanych wg artykułów.
+- orzecznictwo/*.csv — szczegółowe listy orzeczeń per artykuł
+  (format: saos_id|date|court|case_number|type|score|saos_url).
+
+SYSTEM SCORINGU ORZECZEŃ:
+Każde orzeczenie ma score odzwierciedlający wagę precedensową:
+- score 98: wyroki Trybunału Konstytucyjnego
+- score 96: uchwały SN w składzie 7+ sędziów
+- score 89: uchwały SN
+- score 78: wyroki SN
+- score 69: postanowienia SN
+- score 56: wyroki sądów apelacyjnych
+- score 40-55: wyroki sądów okręgowych
+Przy cytowaniu priorytetem są orzeczenia z najwyższym score.
+
+ZASADY PRACY:
+1. Każdą sygnaturę orzeczenia, którą podajesz w odpowiedzi, MUSISZ
+   wcześniej znaleźć w plikach bazy. Nigdy nie wymyślaj sygnatur —
+   halucynacje prawne są najgroźniejszym błędem.
+2. Przed cytowaniem przepisu sprawdź pole "status" we frontmatter —
+   jeśli nie jest "akt posiada tekst jednolity" lub "obowiązujący",
+   zaznacz to w odpowiedzi.
+3. Szukaj orzecznictwa najpierw w orzecznictwo.md (przegląd),
+   potem w plikach CSV (szczegóły).
+4. Artykuły z indeksami górnymi (np. art. 442¹) w nazwach plików CSV
+   zapisane są bez znaków specjalnych: art-4421.csv.
+5. Jeśli nie znalazłeś orzecznictwa w bazie — napisz to wprost.
+   Lepiej "nie znaleziono w bazie nalegalu" niż fikcyjna sygnatura.
+6. Score orzeczeń:
+   * najpierw cytuj orzeczenia TK i uchwały SN (score 89+),
+   * potem wyroki i postanowienia SN (score 69+),
+   * orzeczenia sądów apelacyjnych i okręgowych jako uzupełnienie.
+7. Gdy weryfikujesz sygnaturę powołaną przez stronę przeciwną —
+   sprawdź ją w plikach CSV i ustal, przy jakich artykułach
+   się pojawia. Może to ujawnić odmienny kontekst.</pre>
+        </div>
+
+        <h2 class="doc-h2" id="ip-co-daje">Co daje wklejenie instrukcji</h2>
+        <ul class="doc-ul">
+          <li><strong>AI wie, gdzie szukać.</strong> Zamiast przeszukiwać losowe pliki, otwiera od razu właściwy katalog ISAP, sprawdza <code class="inline">orzecznictwo.md</code>, potem szczegółowe CSV.</li>
+          <li><strong>AI nie zmyśla sygnatur.</strong> Reguła „każda sygnatura musi być znaleziona w pliku" eliminuje najgroźniejszy błąd modeli językowych.</li>
+          <li><strong>AI ostrzega o uchylonych aktach.</strong> Sprawdza pole „status" we frontmatter — jeśli akt nie obowiązuje, zaznacza to w odpowiedzi.</li>
+          <li><strong>AI priorytetyzuje orzeczenia.</strong> Wie, że uchwała SN ma większą wagę niż wyrok sądu okręgowego, i prawidłowo szereguje cytowania.</li>
+          <li><strong>AI radzi sobie z indeksami górnymi.</strong> Wie, że plik dla art. 442¹ to <code class="inline">art-4421.csv</code>.</li>
+        </ul>
+
+        <h2 class="doc-h2" id="ip-aktualizacja">Aktualizacja instrukcji</h2>
+        <p class="doc-p">Instrukcje są rozwijane w miarę gromadzenia doświadczeń. Jeśli zauważysz, że AI popełnia powtarzalny błąd, którego instrukcje nie pokrywają — daj nam znać przez Issues na GitHubie. Dodamy odpowiednią regułę i zaktualizujemy ten dokument.</p>
+
+        <div class="doc-pagination">
+          <a href="#" class="page-btn" onclick="showSection('inne-narzedzia', document.querySelector('[data-section=inne-narzedzia]'));return false;">
+            <span class="pb-label">← Poprzednia strona</span>
+            <span class="pb-title">Inne narzędzia</span>
+          </a>
+          <a href="#" class="page-btn next" onclick="showSection('zasady-pracy', document.querySelector('[data-section=zasady-pracy]'));return false;">
+            <span class="pb-label">Następna strona</span>
+            <span class="pb-title">Zasady dobrej pracy →</span>
+          </a>
+        </div>
+        <p class="page-disclaimer">To nie jest oficjalne źródło prawa. Jedynym autentycznym źródłem jest Dziennik Ustaw publikowany na <a href="https://isap.sejm.gov.pl" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">isap.sejm.gov.pl</a>. Teksty są generowane automatycznie z PDF-ów ISAP i mogą zawierać błędy ekstrakcji.</p>
+      </div>
+
+      <!-- ═══ ZASADY PRACY ═══ -->
+      <div class="doc-section" id="sec-zasady-pracy">
+        <div class="breadcrumb">
+          <a href="index.html">nalegalu.org</a>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <span>Naucz AI nalegalu</span>
+        </div>
+        <div class="doc-eyebrow">Naucz AI nalegalu</div>
+        <h1 class="doc-title">Zasady dobrej pracy z AI</h1>
+        <p class="doc-lead">Krótka lista praktyk, które sprawiają, że odpowiedzi AI są precyzyjne i bezpieczne prawnie. Stosuj je niezależnie od tego, jakiego narzędzia używasz.</p>
+
+        <h2 class="doc-h2" id="zp-weryfikacja">Zawsze weryfikuj sygnatury</h2>
+        <p class="doc-p">Każda sygnatura w odpowiedzi AI powinna być zweryfikowana w bazie. Jeśli AI poda orzeczenie „I CSK 123/15" — otwórz odpowiedni plik CSV i sprawdź, czy ono tam jest. Halucynacje sygnatur to najczęstszy i najgroźniejszy błąd modeli językowych.</p>
+
+        <h2 class="doc-h2" id="zp-konkretne">Pytaj konkretnie</h2>
+        <p class="doc-p">Im bardziej konkretne pytanie, tym lepsza odpowiedź. Zamiast pytać „co mówi prawo o odszkodowaniu?", napisz „jakie przesłanki odpowiedzialności wynikają z art. 415 k.c. w świetle orzeczeń SN z bazy?". AI musi wiedzieć, gdzie szukać.</p>
+
+        <h2 class="doc-h2" id="zp-status">Sprawdzaj status aktu</h2>
+        <p class="doc-p">Frontmatter każdego <code class="inline">index.md</code> zawiera pole <code class="inline">status</code>:</p>
+        <ul class="doc-ul">
+          <li><code class="inline">akt posiada tekst jednolity</code> — akt obowiązujący</li>
+          <li><code class="inline">obowiązujący</code> — akt obowiązujący</li>
+          <li>inne (np. <code class="inline">uchylony</code>) — akt nieaktualny, wymaga zaznaczenia</li>
+        </ul>
+
+        <h2 class="doc-h2" id="zp-score">Priorytetyzuj orzeczenia po score</h2>
+        <p class="doc-p">Hierarchia źródeł od najsilniejszego: Trybunał Konstytucyjny (score 98) → uchwały SN w składzie 7+ (96) → uchwały SN (89) → wyroki SN (78) → postanowienia SN (69) → wyroki sądów apelacyjnych (56) → wyroki sądów okręgowych (40-55). Przy budowaniu argumentacji opartej wyłącznie na orzeczeniach SO zaznacz, że linia orzecznicza nie została jeszcze potwierdzona przez SN.</p>
+
+        <h2 class="doc-h2" id="zp-pamiec">Nie wierz pamięci AI</h2>
+        <p class="doc-p">Modele językowe znają polskie prawo, ale „z pamięci". Mogą pomylić numer artykułu, zapomnieć o nowelizacji, nie znać orzeczenia SN z 2024 roku. Praca z plikami nalegalu eliminuje to ryzyko — ale tylko jeśli AI faktycznie czyta pliki, a nie odpowiada z pamięci.</p>
+
+        <div class="callout tip">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <div class="callout-body">
+            <strong>Mała sztuczka</strong>
+            <p>Jeśli odpowiedź wydaje Ci się zbyt ogólna lub bez konkretnych sygnatur, dopisz w czacie: <em>„Odpowiedz wyłącznie na podstawie plików w bazie. Podaj ścieżki do plików, z których korzystasz."</em> AI wymusi na sobie czytanie plików.</p>
+          </div>
+        </div>
+
+        <h2 class="doc-h2" id="zp-brak">Brak w bazie ≠ brak orzeczenia</h2>
+        <p class="doc-p">Baza nalegalu zawiera orzeczenia z systemu SAOS, ale nie jest kompletna. Jeśli AI nie znajdzie konkretnego orzeczenia, nie znaczy, że ono nie istnieje. Zaznaczaj w odpowiedzi: „wg bazy nalegalu" lub „nie znaleziono w bazie nalegalu" — to uczciwe wobec klienta i bezpieczne prawnie.</p>
+
+        <div class="doc-pagination">
+          <a href="#" class="page-btn" onclick="showSection('instrukcje-projektu', document.querySelector('[data-section=instrukcje-projektu]'));return false;">
+            <span class="pb-label">← Poprzednia strona</span>
+            <span class="pb-title">Instrukcje projektu</span>
+          </a>
+          <a href="#" class="page-btn next" onclick="showSection('prompty', document.querySelector('[data-section=prompty]'));return false;">
+            <span class="pb-label">Następna strona</span>
+            <span class="pb-title">Biblioteka promptów →</span>
+          </a>
+        </div>
+        <p class="page-disclaimer">To nie jest oficjalne źródło prawa. Jedynym autentycznym źródłem jest Dziennik Ustaw publikowany na <a href="https://isap.sejm.gov.pl" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">isap.sejm.gov.pl</a>. Teksty są generowane automatycznie z PDF-ów ISAP i mogą zawierać błędy ekstrakcji.</p>
+      </div>
+
+      <!-- ═══ PROMPTY ═══ -->
+      <div class="doc-section" id="sec-prompty">
+        <div class="breadcrumb">
+          <a href="index.html">nalegalu.org</a>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <span>Biblioteka promptów</span>
+        </div>
+        <div class="doc-eyebrow">Biblioteka promptów</div>
+        <h1 class="doc-title">Gotowe prompty do pracy z nalegalu</h1>
+        <p class="doc-lead">Sprawdzone szablony zapytań do typowych zadań prawniczych. Skopiuj wybrany prompt, zastąp fragmenty w <code class="inline">[nawiasach kwadratowych]</code> swoimi danymi i wklej do czatu z Claude Cowork.</p>
+
+        <div class="callout info">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="callout-body">
+            <strong>Lista jest rozwijana razem ze społecznością</strong>
+            <p>Każdy może zaproponować swój prompt — zobacz sekcję <a href="#" onclick="showSection('wklad', document.querySelector('[data-section=wklad]'));return false;" style="color:var(--teal)">Wkład społeczności</a>. Im więcej osób podzieli się swoimi sprawdzonymi szablonami, tym lepsza staje się ta biblioteka.</p>
+          </div>
+        </div>
+
+        <h2 class="doc-h2" id="indeks">Indeks promptów</h2>
+        <div class="prompt-index">
+          <a href="#cat-przepis">Analiza przepisu</a>
+          <a href="#cat-orzecznictwo">Badanie orzecznictwa</a>
+          <a href="#cat-pisma">Pisma i dokumenty</a>
+          <a href="#cat-nauka">Nauka i egzaminy</a>
+          <a href="#cat-mapa">Analiza porównawcza</a>
+        </div>
+
+        <!-- KATEGORIA: PRZEPIS -->
+        <div class="prompt-category" id="cat-przepis">
+          <h2 class="prompt-category-title">1. Analiza przepisu</h2>
+          <p class="prompt-category-desc">Gdy chcesz szybko zrozumieć konkretny artykuł — jego treść, interpretację i orzecznictwo.</p>
+
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <div class="prompt-item-title">Treść artykułu + wiodące orzecznictwo</div>
+              <div class="prompt-item-purpose">Szybki przegląd: tekst przepisu plus 10 najważniejszych orzeczeń, posortowanych po wadze precedensowej.</div>
+            </div>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">Prompt</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+              <pre>Znajdź treść [art. 415 Kodeksu cywilnego] i pokaż 10 najważniejszych
+orzeczeń z pliku CSV. Podaj: sygnaturę, datę, typ sądu i score.
+Zacznij od orzeczeń z najwyższym score (TK, uchwały SN).</pre>
+            </div>
+          </div>
+
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <div class="prompt-item-title">Wyjaśnienie przepisu prostym językiem</div>
+              <div class="prompt-item-purpose">Dla nauki lub tłumaczenia klientowi — przepis przedstawiony przystępnie z przykładami.</div>
+            </div>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">Prompt</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+              <pre>Przeczytaj [art. 58 Kodeksu cywilnego] z pliku index.md.
+Wyjaśnij go prostym językiem, jak dla studenta pierwszego roku prawa.
+Podaj 2-3 praktyczne przykłady zastosowania.</pre>
+            </div>
+          </div>
+
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <div class="prompt-item-title">Porównanie dwóch instytucji prawnych</div>
+              <div class="prompt-item-purpose">Tabela porównawcza z przepisami i orzeczeniami SN — solidna baza do pisma lub opracowania.</div>
+            </div>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">Prompt</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+              <pre>Na podstawie plików nalegalu porównaj:
+- odpowiedzialność kontraktową (art. 471 k.c.)
+- odpowiedzialność deliktową (art. 415 k.c.)
+
+Dla każdej podaj: treść przepisu, przesłanki, różnice w ciężarze
+dowodu, oraz 3 najważniejsze orzeczenia SN z CSV (z sygnaturami).</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- KATEGORIA: ORZECZNICTWO -->
+        <div class="prompt-category" id="cat-orzecznictwo">
+          <h2 class="prompt-category-title">2. Badanie orzecznictwa</h2>
+          <p class="prompt-category-desc">Gdy potrzebujesz dotrzeć do konkretnych orzeczeń — zweryfikować sygnaturę, prześledzić linię orzeczniczą, znaleźć orzeczenia SN do tematu.</p>
+
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <div class="prompt-item-title">Linia orzecznicza do artykułu</div>
+              <div class="prompt-item-purpose">Chronologiczny przegląd orzecznictwa z trendami — pokazuje, jak zmieniała się wykładnia.</div>
+            </div>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">Prompt</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+              <pre>Przeanalizuj orzecznictwo do [art. 24 Kodeksu cywilnego].
+1. Sprawdź orzecznictwo.md — ile jest orzeczeń, jakich sądów.
+2. Pobierz top 20 z CSV (najwyższy score).
+3. Pogrupuj chronologicznie i wskaż, jak zmieniała się interpretacja
+   tego przepisu na przestrzeni lat.</pre>
+            </div>
+          </div>
+
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <div class="prompt-item-title">Weryfikacja sygnatury</div>
+              <div class="prompt-item-purpose">Kluczowe przy weryfikacji pism procesowych — potwierdzenie, czy orzeczenie istnieje i w jakim kontekście.</div>
+            </div>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">Prompt</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+              <pre>Sprawdź, czy orzeczenie o sygnaturze [II CSK 111/08] istnieje
+w bazie nalegalu. Przeszukaj pliki CSV we wszystkich katalogach.
+Jeśli znajdziesz — podaj przy jakich artykułach i ustawach się pojawia,
+jaki ma score i datę.
+Jeśli nie znajdziesz — napisz wprost, że go nie ma w bazie.</pre>
+            </div>
+          </div>
+
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <div class="prompt-item-title">Orzecznictwo SN do tematu</div>
+              <div class="prompt-item-purpose">Lista orzeczeń SN z konkretnymi sygnaturami z bazy — bez ryzyka halucynacji.</div>
+            </div>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">Prompt</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+              <pre>Znajdź orzeczenia Sądu Najwyższego dotyczące [zadośćuczynienia
+za naruszenie dóbr osobistych w internecie].
+1. Sprawdź orzecznictwo do art. 23, 24, 448 Kodeksu cywilnego.
+2. Wybierz TYLKO orzeczenia SN (score 69+) z plików CSV.
+3. Podaj sygnatury, daty i przy jakim artykule się pojawiają.</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- KATEGORIA: PISMA -->
+        <div class="prompt-category" id="cat-pisma">
+          <h2 class="prompt-category-title">3. Pisma i dokumenty</h2>
+          <p class="prompt-category-desc">Pomoc przy budowaniu argumentacji procesowej, weryfikacji pism strony przeciwnej i przygotowaniu procedur.</p>
+
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <div class="prompt-item-title">Argumentacja prawna</div>
+              <div class="prompt-item-purpose">Szkic argumentacji opartej na faktycznych przepisach i zweryfikowanych orzeczeniach.</div>
+            </div>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">Prompt</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+              <pre>Reprezentuję [powoda/pozwanego] w sprawie o [opis sprawy].
+Kluczowe przepisy to [art. X, Y, Z ustawy].
+
+Na podstawie plików nalegalu:
+1. Przytocz treść tych przepisów.
+2. Znajdź orzeczenia SN wspierające moją argumentację (score 69+).
+3. Zaproponuj strukturę argumentacji z powołaniem na konkretne
+   przepisy i orzeczenia (podaj sygnatury z bazy).</pre>
+            </div>
+          </div>
+
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <div class="prompt-item-title">Analiza pisma strony przeciwnej</div>
+              <div class="prompt-item-purpose">Weryfikacja powołanych orzeczeń + kontrargumenty. Szczególnie wartościowe przy cytowaniu orzeczeń niższych sądów.</div>
+            </div>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">Prompt</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+              <pre>Oto treść pisma od strony przeciwnej:
+
+[wklej treść pisma]
+
+Na podstawie plików nalegalu:
+1. Zidentyfikuj przepisy i sygnatury powołane w piśmie.
+2. Sprawdź każdą sygnaturę w plikach CSV — czy istnieje, jaki ma
+   score, przy jakich artykułach się pojawia.
+3. Oceń siłę argumentów strony przeciwnej.
+4. Zaproponuj kontrargumenty z powołaniem na orzeczenia SN
+   o wyższym score.</pre>
+            </div>
+          </div>
+
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <div class="prompt-item-title">Procedura krok po kroku</div>
+              <div class="prompt-item-purpose">Checklista proceduralna z konkretnymi podstawami prawnymi — punkt wyjścia dla klienta lub notatka robocza.</div>
+            </div>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">Prompt</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+              <pre>Na podstawie przepisów w bazie nalegalu opisz krok po kroku
+procedurę [np. dochodzenia odszkodowania za błąd medyczny /
+zakładania spółki z o.o. / odwołania od decyzji administracyjnej].
+
+Dla każdego kroku podaj:
+- konkretny przepis (artykuł i ustawa)
+- terminy (jeśli są określone w przepisach)
+- wymagane dokumenty</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- KATEGORIA: NAUKA -->
+        <div class="prompt-category" id="cat-nauka">
+          <h2 class="prompt-category-title">4. Nauka i egzaminy</h2>
+          <p class="prompt-category-desc">Dla studentów i osób przygotowujących się do egzaminów. Wszystkie prompty oparte na faktycznych przepisach z bazy.</p>
+
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <div class="prompt-item-title">Pytania egzaminacyjne</div>
+              <div class="prompt-item-purpose">Zestaw pytań z odpowiedziami opartymi na faktycznych przepisach i orzeczeniach.</div>
+            </div>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">Prompt</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+              <pre>Na podstawie [Rozdziału X Kodeksu cywilnego / art. 1-50 KPC /
+działu o umowach] z plików nalegalu wygeneruj 10 pytań
+egzaminacyjnych. Dla każdego pytania:
+- podaj prawidłową odpowiedź z powołaniem na konkretny artykuł
+- wskaż 1 orzeczenie SN, które potwierdza tę interpretację</pre>
+            </div>
+          </div>
+
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <div class="prompt-item-title">Notatka do egzaminu</div>
+              <div class="prompt-item-purpose">Skondensowane opracowanie z konkretnymi przepisami i orzeczeniami do zapamiętania.</div>
+            </div>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">Prompt</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+              <pre>Przeczytaj [art. 1-20 Kodeksu postępowania karnego] z index.md.
+Przygotuj zwięzłą notatkę do egzaminu:
+- kluczowe zasady procesu karnego
+- najważniejsze terminy i ich długość
+- 3-5 orzeczeń SN, które warto znać (z sygnaturami z CSV)</pre>
+            </div>
+          </div>
+
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <div class="prompt-item-title">Kazus</div>
+              <div class="prompt-item-purpose">Analiza kazusu z przepisami i orzeczeniami z bazy — dobry trening przed egzaminem.</div>
+            </div>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">Prompt</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+              <pre>Na podstawie przepisów w bazie nalegalu rozwiąż następujący kazus:
+
+[opis stanu faktycznego]
+
+Wskaż:
+1. Które przepisy mają zastosowanie (z treścią z index.md)
+2. Jakie roszczenia przysługują stronom
+3. Jak orzekały sądy w podobnych sprawach (sygnatury z CSV)</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- KATEGORIA: MAPA -->
+        <div class="prompt-category" id="cat-mapa">
+          <h2 class="prompt-category-title">5. Analiza porównawcza</h2>
+          <p class="prompt-category-desc">Gdy temat dotyczy wielu ustaw lub trzeba zobaczyć powiązania między przepisami.</p>
+
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <div class="prompt-item-title">Mapa przepisów do problemu</div>
+              <div class="prompt-item-purpose">Wszystkie przepisy z różnych ustaw dotyczące jednego tematu — w jednym widoku.</div>
+            </div>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">Prompt</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+              <pre>Jakie przepisy w bazie nalegalu regulują [np. odpowiedzialność
+za produkt niebezpieczny / ochronę danych osobowych / mobbing]?
+
+Przeszukaj pliki index.md w różnych katalogach tematycznych.
+Dla każdego znalezionego przepisu podaj:
+- ustawa i artykuł
+- krótkie streszczenie
+- liczbę orzeczeń w CSV (jeśli istnieje)</pre>
+            </div>
+          </div>
+
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <div class="prompt-item-title">Krzyżowe odwołania między ustawami</div>
+              <div class="prompt-item-purpose">Sieć powiązań między przepisami różnych ustaw — pokazuje szerszy kontekst orzeczniczy.</div>
+            </div>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">Prompt</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+              <pre>Sprawdź, w jaki sposób [art. 415 Kodeksu cywilnego] jest powiązany
+z innymi przepisami w bazie nalegalu.
+1. Przeszukaj pliki index.md — które inne ustawy odwołują się
+   do art. 415 k.c.?
+2. Czy te same sygnatury orzeczeń pojawiają się przy art. 415 k.c.
+   i przy przepisach innych ustaw?</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="community-cta">
+          <h4>Masz prompt, który dobrze działa?</h4>
+          <p>Ta biblioteka jest rozwijana razem ze społecznością prawniczą. Jeśli używasz nalegalu i wypracowałeś szablon zapytania, który daje dobre rezultaty — podziel się nim. Każdy zaakceptowany prompt zostanie dodany do tej listy z podaniem autora.</p>
+          <a href="https://github.com/nalegaluorg/nalegalu/issues/new?labels=prompt&amp;title=Nowy+prompt%3A+" target="_blank" rel="noopener" class="btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.607.069-.607 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            Zaproponuj prompt na GitHubie
+          </a>
+        </div>
+
+        <div class="doc-pagination">
+          <a href="#" class="page-btn" onclick="showSection('zasady-pracy', document.querySelector('[data-section=zasady-pracy]'));return false;">
+            <span class="pb-label">← Poprzednia strona</span>
+            <span class="pb-title">Zasady dobrej pracy</span>
+          </a>
+          <a href="#" class="page-btn next" onclick="showSection('problemy', document.querySelector('[data-section=problemy]'));return false;">
+            <span class="pb-label">Następna strona</span>
+            <span class="pb-title">Rozwiązywanie problemów →</span>
+          </a>
+        </div>
+        <p class="page-disclaimer">To nie jest oficjalne źródło prawa. Jedynym autentycznym źródłem jest Dziennik Ustaw publikowany na <a href="https://isap.sejm.gov.pl" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">isap.sejm.gov.pl</a>. Teksty są generowane automatycznie z PDF-ów ISAP i mogą zawierać błędy ekstrakcji.</p>
+      </div>
+
+      <!-- ═══ PROBLEMY ═══ -->
+      <div class="doc-section" id="sec-problemy">
+        <div class="breadcrumb">
+          <a href="index.html">nalegalu.org</a>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <span>Pomoc</span>
+        </div>
+        <div class="doc-eyebrow">Pomoc</div>
+        <h1 class="doc-title">Rozwiązywanie problemów</h1>
+        <p class="doc-lead">Najczęstsze problemy zgłaszane przez użytkowników i sposoby ich rozwiązania.</p>
+
+        <h2 class="doc-h2" id="pr-pliki">Claude nie widzi plików / mówi, że nie ma dostępu</h2>
+        <p class="doc-p"><strong>Przyczyna:</strong> Folder nie jest poprawnie podpięty do projektu Cowork lub został przeniesiony na dysku.</p>
+        <p class="doc-p"><strong>Rozwiązanie:</strong> Otwórz ustawienia projektu i sprawdź, czy folder jest wskazany. Sprawdź też w eksploratorze plików, że folder zawiera podkatalogi z plikami <code class="inline">.md</code> (np. <code class="inline">prawo-cywilne/</code>).</p>
+
+        <h2 class="doc-h2" id="pr-pamiec">Claude odpowiada z pamięci zamiast z plików</h2>
+        <p class="doc-p"><strong>Przyczyna:</strong> Pytanie jest zbyt ogólne — model uznaje, że może odpowiedzieć ze swojej wiedzy bez sięgania do bazy.</p>
+        <p class="doc-p"><strong>Rozwiązanie:</strong> Dodaj w pytaniu: <em>„Odpowiedz na podstawie plików w bazie, nie z pamięci. Podaj ścieżki do plików, z których korzystasz."</em></p>
+
+        <h2 class="doc-h2" id="pr-halucynacja">Claude wymyśla sygnatury</h2>
+        <p class="doc-p"><strong>Przyczyna:</strong> Najczęstszy i najpoważniejszy problem. Modele językowe mają silną tendencję do generowania prawdopodobnie brzmiących, ale fikcyjnych sygnatur.</p>
+        <p class="doc-p"><strong>Rozwiązanie:</strong> Po pierwsze — wklej prawidłowe instrukcje projektu (zobacz sekcję <a href="#" onclick="showSection('instrukcje-projektu', document.querySelector('[data-section=instrukcje-projektu]'));return false;" style="color:var(--teal)">Instrukcje projektu</a>). Po drugie — w konkretnym pytaniu dodaj: <em>„Podawaj TYLKO sygnatury, które faktycznie znalazłeś w plikach CSV. Jeśli nie znalazłeś orzecznictwa, napisz to wprost."</em></p>
+
+        <h2 class="doc-h2" id="pr-ogolne">Odpowiedzi są zbyt ogólne</h2>
+        <p class="doc-p"><strong>Przyczyna:</strong> Pytanie nie jest dostatecznie konkretne — AI nie wie, gdzie szukać.</p>
+        <p class="doc-p"><strong>Rozwiązanie:</strong> Zamiast „co mówi prawo o odszkodowaniu?" napisz „jakie przesłanki odpowiedzialności wynikają z art. 415 k.c. w świetle orzeczeń SN z CSV?". Konkretne numery artykułów i wskazanie typu źródeł (CSV, orzecznictwo.md) prowadzą AI do właściwych plików.</p>
+
+        <h2 class="doc-h2" id="pr-wiecej">Potrzebuję więcej orzeczeń niż AI pokazało</h2>
+        <p class="doc-p"><strong>Przyczyna:</strong> Domyślnie AI pokazuje top 10-20 orzeczeń (te z najwyższym score).</p>
+        <p class="doc-p"><strong>Rozwiązanie:</strong> Poproś wprost: <em>„Pokaż wszystkie orzeczenia z pliku <code class="inline">art-415.csv</code> z datą po 2020 roku"</em> lub <em>„Odczytaj cały plik CSV i wypisz pełną listę"</em>.</p>
+
+        <h2 class="doc-h2" id="pr-aktualizacja">Jak aktualizować bazę po zmianie prawa</h2>
+        <p class="doc-p"><strong>Jeśli pobrałeś przez git:</strong> wystarczy <code class="inline">git pull</code> w folderze repozytorium.</p>
+        <p class="doc-p"><strong>Jeśli pobrałeś ZIP:</strong> pobierz nowy ZIP z GitHuba i zastąp stary folder. Zalecamy git — aktualizacja zajmuje sekundy.</p>
+
+        <div class="doc-pagination">
+          <a href="#" class="page-btn" onclick="showSection('prompty', document.querySelector('[data-section=prompty]'));return false;">
+            <span class="pb-label">← Poprzednia strona</span>
+            <span class="pb-title">Biblioteka promptów</span>
+          </a>
+          <a href="#" class="page-btn next" onclick="showSection('wklad', document.querySelector('[data-section=wklad]'));return false;">
+            <span class="pb-label">Następna strona</span>
+            <span class="pb-title">Wkład społeczności →</span>
+          </a>
+        </div>
+        <p class="page-disclaimer">To nie jest oficjalne źródło prawa. Jedynym autentycznym źródłem jest Dziennik Ustaw publikowany na <a href="https://isap.sejm.gov.pl" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">isap.sejm.gov.pl</a>. Teksty są generowane automatycznie z PDF-ów ISAP i mogą zawierać błędy ekstrakcji.</p>
+      </div>
+
+      <!-- ═══ WKŁAD ═══ -->
+      <div class="doc-section" id="sec-wklad">
+        <div class="breadcrumb">
+          <a href="index.html">nalegalu.org</a>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <span>Pomoc</span>
+        </div>
+        <div class="doc-eyebrow">Pomoc</div>
+        <h1 class="doc-title">Wkład społeczności</h1>
+        <p class="doc-lead">nalegalu jest projektem otwartym. Cała dokumentacja, instrukcje i biblioteka promptów są rozwijane wspólnie — przez prawników, studentów i wszystkich, którzy korzystają z bazy.</p>
+
+        <h2 class="doc-h2" id="w-prompty">Zaproponuj prompt</h2>
+        <p class="doc-p">Jeśli wypracowałeś szablon zapytania, który dobrze działa z bazą — podziel się nim. Wystarczy:</p>
+        <ol class="doc-ol">
+          <li>Wejść do <a href="https://github.com/nalegaluorg/nalegalu/issues" target="_blank" rel="noopener" style="color:var(--teal)">Issues na GitHubie</a></li>
+          <li>Otworzyć nowe Issue z etykietą <code class="inline">prompt</code></li>
+          <li>Wkleić: tytuł, opis (do czego służy), pełny tekst promptu</li>
+        </ol>
+        <p class="doc-p">Po krótkiej weryfikacji prompt zostanie dodany do biblioteki z podaniem autora.</p>
+
+        <h2 class="doc-h2" id="w-narzedzia">Zaproponuj instrukcję dla nowego narzędzia</h2>
+        <p class="doc-p">Używasz Cursor, Obsidian, ChatGPT z plikami albo innego narzędzia z bazą nalegalu? Napisz instrukcję krok po kroku, jak ją skonfigurowałeś. Najlepiej w formacie zbliżonym do <a href="#" onclick="showSection('claude-cowork', document.querySelector('[data-section=claude-cowork]'));return false;" style="color:var(--teal)">instrukcji dla Claude Cowork</a>.</p>
+
+        <h2 class="doc-h2" id="w-bledy">Zgłoś błąd lub propozycję</h2>
+        <ul class="doc-ul">
+          <li><strong>Błąd w danych</strong> (np. brakujący artykuł, nieaktualny status aktu) — Issue z etykietą <code class="inline">data</code></li>
+          <li><strong>Błąd w dokumentacji</strong> — Issue z etykietą <code class="inline">docs</code></li>
+          <li><strong>Propozycja funkcji</strong> — Issue z etykietą <code class="inline">enhancement</code></li>
+        </ul>
+
+        <h2 class="doc-h2" id="w-kontakt">Kontakt</h2>
+        <p class="doc-p">Jeśli wolisz e-mail zamiast GitHuba: <a href="mailto:asia@nalegalu.org" style="color:var(--teal)">asia@nalegalu.org</a>. Odpowiadamy zwykle w ciągu kilku dni.</p>
+
+        <div class="callout tip">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <div class="callout-body">
+            <strong>Każdy wkład ma znaczenie</strong>
+            <p>Im więcej osób z praktyki prawniczej dzieli się swoimi doświadczeniami, tym lepsza staje się dokumentacja. Nawet zgłoszenie literówki to realna pomoc dla kolejnych użytkowników.</p>
+          </div>
+        </div>
+
+        <div class="doc-pagination">
+          <a href="#" class="page-btn" onclick="showSection('problemy', document.querySelector('[data-section=problemy]'));return false;">
+            <span class="pb-label">← Poprzednia strona</span>
+            <span class="pb-title">Rozwiązywanie problemów</span>
+          </a>
+        </div>
+        <p class="page-disclaimer">To nie jest oficjalne źródło prawa. Jedynym autentycznym źródłem jest Dziennik Ustaw publikowany na <a href="https://isap.sejm.gov.pl" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">isap.sejm.gov.pl</a>. Teksty są generowane automatycznie z PDF-ów ISAP i mogą zawierać błędy ekstrakcji.</p>
+      </div>
+
+    </div>
+
+    <nav class="docs-toc" id="docsToc">
+      <div class="toc-label">Na tej stronie</div>
+      <ul class="toc-list" id="tocList"></ul>
+    </nav>
+  </div>
+</div>
+
+
+<script>
+  function showSection(id, linkEl) {
+    document.querySelectorAll('.doc-section').forEach(s => s.classList.remove('visible'));
+    const sec = document.getElementById('sec-' + id);
+    if (sec) sec.classList.add('visible');
+
+    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+    if (linkEl) linkEl.classList.add('active');
+    else {
+      const link = document.querySelector('[data-section="' + id + '"]');
+      if (link) link.classList.add('active');
+    }
+
+    buildToc(sec);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('open');
+  }
+
+  function buildToc(section) {
+    const list = document.getElementById('tocList');
+    list.innerHTML = '';
+    if (!section) return;
+    section.querySelectorAll('h2.doc-h2, h3.doc-h3, h2.prompt-category-title').forEach(h => {
+      const li = document.createElement('li');
+      if (h.tagName === 'H3') li.classList.add('toc-sub');
+      const a = document.createElement('a');
+      a.href = '#' + (h.id || '');
+      a.textContent = h.textContent;
+      a.onclick = function(e) {
+        e.preventDefault();
+        const top = h.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      };
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+  }
+
+  buildToc(document.getElementById('sec-intro'));
+
+  document.getElementById('sidebarToggle').onclick = function() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('open');
+  };
+  document.getElementById('sidebarOverlay').onclick = function() {
+    document.getElementById('sidebar').classList.remove('open');
+    this.classList.remove('open');
+  };
+
+  function copyCode(btn) {
+    const code = btn.closest('.code-block').querySelector('pre').innerText;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = 'Skopiowano!';
+      setTimeout(() => btn.textContent = 'Kopiuj', 2000);
+    });
+  }
+
+  const searchIndex = [
+    { section:'intro',                title:'Od czego zacząć',          text:'wprowadzenie quick start trzy kroki', excerpt:'Trzy kroki do pracy z bazą nalegalu.' },
+    { section:'claude-cowork',        title:'Claude Cowork',            text:'claude cowork desktop konfiguracja krok po kroku zip git folder', excerpt:'Pełna instrukcja konfiguracji Claude Cowork.' },
+    { section:'inne-narzedzia',       title:'Inne narzędzia',           text:'obsidian cursor chatgpt wkrótce', excerpt:'Planowane instrukcje dla kolejnych narzędzi.' },
+    { section:'instrukcje-projektu',  title:'Instrukcje projektu',      text:'project instructions naucz AI bazy struktura plików score halucynacje', excerpt:'Gotowy tekst do wklejenia w ustawieniach Cowork.' },
+    { section:'zasady-pracy',         title:'Zasady dobrej pracy',      text:'weryfikacja sygnatury status score halucynacje praktyki', excerpt:'Praktyki, które dają precyzyjne odpowiedzi.' },
+    { section:'prompty',              title:'Biblioteka promptów',      text:'prompty szablony przepis orzecznictwo pisma nauka egzamin kazus', excerpt:'Sprawdzone szablony zapytań do typowych zadań.' },
+    { section:'problemy',             title:'Rozwiązywanie problemów',  text:'problem nie widzi plików halucynacje pamięć aktualizacja git', excerpt:'Najczęstsze problemy i sposoby rozwiązania.' },
+    { section:'wklad',                title:'Wkład społeczności',       text:'wkład społeczność github issues prompt zgłoś', excerpt:'Jak dodać własne prompty i instrukcje.' },
+  ];
+
+  const labels = {
+    intro:'Wprowadzenie',
+    'claude-cowork':'Konfiguracja narzędzi', 'inne-narzedzia':'Konfiguracja narzędzi',
+    'instrukcje-projektu':'Naucz AI nalegalu', 'zasady-pracy':'Naucz AI nalegalu',
+    prompty:'Biblioteka promptów',
+    problemy:'Pomoc', wklad:'Pomoc',
+  };
+
+  const inp = document.getElementById('searchInput');
+  const box = document.getElementById('searchResults');
+
+  inp.addEventListener('input', function() {
+    const q = this.value.trim().toLowerCase();
+    box.innerHTML = '';
+    if (q.length < 2) { box.classList.remove('open'); return; }
+    const hits = searchIndex.filter(i =>
+      i.title.toLowerCase().includes(q) || i.text.toLowerCase().includes(q)
+    );
+    if (!hits.length) {
+      box.innerHTML = '<div class="search-no-results">Brak wyników dla "' + q + '"</div>';
+    } else {
+      hits.forEach(h => {
+        const el = document.createElement('div');
+        el.className = 'search-result-item';
+        el.innerHTML = '<div class="sr-section">' + labels[h.section] + '</div><div class="sr-title">' + h.title + '</div><div class="sr-excerpt">' + h.excerpt + '</div>';
+        el.onclick = () => { showSection(h.section, null); box.classList.remove('open'); inp.value = ''; };
+        box.appendChild(el);
+      });
+    }
+    box.classList.add('open');
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!inp.contains(e.target) && !box.contains(e.target)) box.classList.remove('open');
+  });
+</script>
+
+</body>
+</html>

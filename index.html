@@ -48,7 +48,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* -- NAV -- */
+    /* ── NAV ── */
     nav {
       position: sticky; top: 0; z-index: 100;
       background: rgba(250,249,247,0.95);
@@ -77,6 +77,13 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--navy); }
+    .nav-docs {
+      border: 1px solid var(--border) !important;
+      padding: 6px 14px; border-radius: 6px;
+      color: var(--text-mid) !important;
+      transition: border-color 0.2s, color 0.2s !important;
+    }
+    .nav-docs:hover { border-color: var(--navy) !important; color: var(--navy) !important; }
     .nav-cta {
       background: var(--navy);
       color: var(--white) !important;
@@ -85,7 +92,7 @@
     }
     .nav-cta:hover { background: var(--navy-mid) !important; color: var(--white) !important; }
 
-    /* -- HERO -- */
+    /* ── HERO ── */
     .hero {
       background: var(--navy);
       color: var(--white);
@@ -101,6 +108,7 @@
         radial-gradient(circle at 20% 80%, oklch(72% 0.16 72 / 0.08) 0%, transparent 50%);
       pointer-events: none;
     }
+    /* Subtle dot grid */
     .hero::after {
       content: '';
       position: absolute; inset: 0;
@@ -179,7 +187,7 @@
       margin-top: 4px; letter-spacing: 0.03em;
     }
 
-    /* -- SECTIONS COMMON -- */
+    /* ── SECTIONS COMMON ── */
     section { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem); }
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-label {
@@ -201,7 +209,7 @@
       max-width: 650px;
     }
 
-    /* -- WHAT WE DO -- */
+    /* ── WHAT WE DO ── */
     .what { background: var(--white); }
     .what-grid {
       display: grid;
@@ -235,7 +243,7 @@
     .what-aside p { font-size: 1rem; color: var(--text-mid); line-height: 1.75; }
     .what-aside strong { color: var(--navy); }
 
-    /* -- FORMATS -- */
+    /* ── FORMATS ── */
     .formats { background: var(--cream); }
     .formats-grid {
       display: grid;
@@ -290,7 +298,7 @@
     }
     .format-link:hover { gap: 10px; }
 
-    /* -- WHY IT MATTERS -- */
+    /* ── WHY IT MATTERS ── */
     .why { background: var(--navy); color: var(--white); }
     .why .section-label { color: var(--amber); }
     .why .section-title { color: var(--white); }
@@ -319,7 +327,7 @@
       font-size: 0.82rem; color: oklch(70% 0.04 250); letter-spacing: 0.03em;
     }
 
-    /* -- STAY IN TOUCH -- */
+    /* ── STAY IN TOUCH ── */
     .contact { background: var(--cream2); }
     .contact-inner {
       max-width: 600px; margin: 0 auto; text-align: center;
@@ -351,6 +359,7 @@
       margin-top: 1.2rem;
       font-size: 0.82rem; color: var(--text-light);
     }
+    /* success state */
     .contact-success {
       display: none;
       background: var(--teal-light);
@@ -360,7 +369,7 @@
       font-weight: 500;
     }
 
-    /* -- FOOTER -- */
+    /* ── FOOTER ── */
     footer {
       background: var(--navy);
       color: oklch(70% 0.04 250);
@@ -393,7 +402,7 @@
     }
     .footer-links a:hover { color: var(--white); }
 
-    /* -- PODCAST BUTTONS -- */
+    /* ── PODCAST BUTTONS ── */
     .podcast-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.4rem; }
     .podcast-btn {
       display: inline-flex; align-items: center; gap: 7px;
@@ -405,10 +414,21 @@
     .podcast-btn.apple { background: #000; color: #fff; }
     .podcast-btn.spotify { background: #1DB954; color: #fff; }
 
-    /* -- SVG ICONS -- */
+    .footer-disclaimer {
+      max-width: 1100px; margin: 1.25rem auto 0;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.78rem; color: oklch(55% 0.04 250);
+      display: flex; align-items: flex-start; gap: 8px; line-height: 1.65;
+    }
+    .footer-disclaimer svg { flex-shrink: 0; margin-top: 2px; }
+    .footer-disclaimer a { color: oklch(65% 0.06 250); text-decoration: underline; text-underline-offset: 2px; }
+    .footer-disclaimer a:hover { color: var(--white); }
+
+    /* ── SVG ICONS ── */
     .icon-gh { display: inline-block; vertical-align: middle; }
 
-    /* -- RESPONSIVE -- */
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .what-grid { grid-template-columns: 1fr; }
@@ -434,6 +454,7 @@
     <li><a href="#formaty">Formaty</a></li>
     <li><a href="#dlaczego">Dlaczego</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
+    <li><a href="docs.html" class="nav-docs">Dokumentacja</a></li>
     <li>
       <a href="https://github.com/nalegaluorg/nalegalu" class="nav-cta" target="_blank" rel="noopener">
         <svg class="icon-gh" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.607.069-.607 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
@@ -469,7 +490,7 @@
         <span class="label">aktów prawnych</span>
       </div>
       <div class="hero-stat">
-        <span class="num">1918<em>-</em>dziś</span>
+        <span class="num">1918<em>–</em>dziś</span>
         <span class="label">zakres historyczny</span>
       </div>
       <div class="hero-stat">
@@ -488,7 +509,7 @@
 <section class="what" id="co-robimy">
   <div class="section-inner">
     <div class="section-label">Co robimy</div>
-    <h2 class="section-title">Ustawodawstwo jako dane,<br>nie jako skan</h2>
+    <h2 class="section-title">Ustawodawstwo jako dane -<br>nie jako skan</h2>
     <p class="section-lead">
       Pobieramy całe polskie prawodawstwo i orzecznictwo, a następnie udostępniamy je
       w nowoczesnych formatach: ustrukturyzowanych, połączonych odniesieniami i gotowych do użycia.
@@ -497,7 +518,7 @@
       <div class="what-block">
         <div class="what-num">01</div>
         <h3>Wszystkie akty prawne</h3>
-        <p>Ustaw, rozporządzeń i obwieszczeń z lat 1918-2025 jest ponad 5 700. Pobieramy je z Dziennika Ustaw i ISAP, normalizujemy strukturę i udostępniamy w czytelnych plikach.</p>
+        <p>Ustaw, rozporządzeń i obwieszczeń z lat 1918–2025 jest ponad 5 700. Pobieramy je z Dziennika Ustaw i ISAP, normalizujemy strukturę i udostępniamy w czytelnych plikach.</p>
       </div>
       <div class="what-block">
         <div class="what-num">02</div>
@@ -561,22 +582,23 @@
       <!-- Card 2 -->
       <div class="format-card">
         <div class="format-icon book">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="oklch(50% 0.14 60)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="oklch(50% 0.14 60)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <div class="format-sub">E-booki</div>
-        <h3>Czytaj na Kindle i telefonie</h3>
+        <div class="format-sub">Społeczność</div>
+        <h3>Discord - AI w prawie</h3>
         <p>
-          Najpopularniejsze akty, Kodeks cywilny, KPC, KK i inne, jako starannie sformatowane
-          pliki EPUB i MOBI. Czytaj w dowolnym miejscu, bez połączenia z internetem.
+          Budujemy społeczność wokół praktycznego wykorzystania AI w prawie i compliance.
+          Wkrótce uruchomimy prywatną społeczność na Discord dla osób zainteresowanych
+          promptami, case studies i AI governance.
         </p>
         <div class="format-tags">
-          <span class="tag">EPUB</span>
-          <span class="tag">MOBI / Kindle</span>
-          <span class="tag">Kodeks cywilny</span>
-          <span class="tag">KPC · KK</span>
+          <span class="tag">Prompty</span>
+          <span class="tag">Case studies</span>
+          <span class="tag">AI governance</span>
+          <span class="tag">Compliance</span>
         </div>
         <a href="#kontakt" class="format-link">
-          Powiadom mnie
+          Zapisz się na listę
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
@@ -638,7 +660,7 @@
       </div>
       <div class="why-callout">
         <blockquote>
-          "Prawo nie może być dobrem luksusowym. Jeśli rozumieją je tylko ci, którzy mogą za to zapłacić, coś jest nie tak."
+          „Prawo nie może być dobrem luksusowym. Jeśli rozumieją je tylko ci, którzy mogą za to zapłacić, coś jest nie tak."
         </blockquote>
         <div class="byline">Misja nalegalu.org</div>
       </div>
@@ -679,8 +701,7 @@
     </a>
     <div class="footer-meta">
       Dane na licencji <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0 1.0 Universal</a>, domena publiczna.<br>
-      Kod źródłowy: <a href="https://github.com/nalegaluorg/nalegalu" target="_blank" rel="noopener">github.com/nalegalu</a> · Kontakt: <a href="mailto:kontakt@nalegalu.org">kontakt@nalegalu.org</a><br>
-      <span style="color: oklch(60% 0.04 250);">To nie jest oficjalne źródło prawa - jedynym autentycznym źródłem jest Dziennik Ustaw publikowany na <a href="https://isap.sejm.gov.pl" target="_blank" rel="noopener">isap.sejm.gov.pl</a>. Teksty są generowane automatycznie z PDF-ów ISAP - mogą zawierać błędy ekstrakcji.</span>
+      Kod źródłowy: <a href="https://github.com/nalegaluorg/nalegalu" target="_blank" rel="noopener">github.com/nalegalu</a> · Kontakt: <a href="mailto:kontakt@nalegalu.org">kontakt@nalegalu.org</a>
     </div>
     <ul class="footer-links">
       <li><a href="#co-robimy">Co robimy</a></li>
@@ -688,6 +709,10 @@
       <li><a href="https://github.com/nalegaluorg/nalegalu" target="_blank" rel="noopener">GitHub</a></li>
       <li><a href="mailto:kontakt@nalegalu.org">Kontakt</a></li>
     </ul>
+  </div>
+  <div class="footer-disclaimer">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="oklch(60% 0.1 60)" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span>To nie jest oficjalne zrodlo prawa. Jedynym autentycznym zrodlem jest Dziennik Ustaw publikowany na <a href="https://isap.sejm.gov.pl" target="_blank" rel="noopener">isap.sejm.gov.pl</a>. Teksty sa generowane automatycznie z PDF-ow ISAP i moga zawierac bledy ekstrakcji.</span>
   </div>
 </footer>
 
