@@ -430,7 +430,19 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .nav-links { display: none; }
+      .nav-links {
+        gap: 0.5rem;
+      }
+      .nav-links li.nav-anchor { display: none; }
+      .nav-cta {
+        padding: 6px 10px !important;
+        font-size: 0.78rem !important;
+      }
+      .nav-cta .gh-text { display: none; }
+      .nav-docs {
+        padding: 6px 10px !important;
+        font-size: 0.78rem !important;
+      }
       .what-grid { grid-template-columns: 1fr; }
       .what-aside { grid-column: span 1; }
       .formats-grid { grid-template-columns: 1fr; }
@@ -450,15 +462,15 @@
     <span class="nav-logo-text">nalegalu</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#co-robimy">Co robimy</a></li>
-    <li><a href="#formaty">Formaty</a></li>
-    <li><a href="#dlaczego">Dlaczego</a></li>
-    <li><a href="#kontakt">Kontakt</a></li>
+    <li class="nav-anchor"><a href="#co-robimy">Co robimy</a></li>
+    <li class="nav-anchor"><a href="#formaty">Formaty</a></li>
+    <li class="nav-anchor"><a href="#dlaczego">Dlaczego</a></li>
+    <li class="nav-anchor"><a href="#kontakt">Kontakt</a></li>
     <li><a href="docs.html" class="nav-docs">Dokumentacja</a></li>
     <li>
       <a href="https://github.com/nalegaluorg/nalegalu" class="nav-cta" target="_blank" rel="noopener">
         <svg class="icon-gh" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.607.069-.607 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-        GitHub
+        <span class="gh-text">GitHub</span>
       </a>
     </li>
   </ul>
@@ -490,16 +502,12 @@
         <span class="label">aktów prawnych</span>
       </div>
       <div class="hero-stat">
-        <span class="num">1918<em>–</em>dziś</span>
-        <span class="label">zakres historyczny</span>
+        <span class="num">824 000<em>+</em></span>
+        <span class="label">orzeczeń sądowych</span>
       </div>
       <div class="hero-stat">
         <span class="num">CC0</span>
         <span class="label">licencja, bez ograniczeń</span>
-      </div>
-      <div class="hero-stat">
-        <span class="num">auto</span>
-        <span class="label">aktualizacja danych</span>
       </div>
     </div>
   </div>
@@ -523,7 +531,7 @@
       <div class="what-block">
         <div class="what-num">02</div>
         <h3>Orzecznictwo sądowe</h3>
-        <p>Wyroki i postanowienia sądów powszechnych, SN i TK, połączone z odpowiednimi artykułami ustaw, które interpretują. Kontekst prawny w jednym miejscu.</p>
+        <p>Ponad 824 000 orzeczeń z bazy SAOS, od Trybunału Konstytucyjnego po sądy okręgowe, powiązanych z konkretnymi artykułami ustaw. Każde orzeczenie ma score ważności: wyroki TK i uchwały SN (★★★) na górze, orzeczenia pomocnicze na dole. Wiesz od razu, które wyroki naprawdę się liczą.</p>
       </div>
       <div class="what-block">
         <div class="what-num">03</div>
@@ -570,6 +578,8 @@
         <div class="format-tags">
           <span class="tag">RAG</span>
           <span class="tag">Fine-tuning</span>
+          <span class="tag">Scoring orzeczeń</span>
+          <span class="tag">CSV per artykuł</span>
           <span class="tag">JSON metadata</span>
           <span class="tag">Cross-references</span>
         </div>
@@ -712,7 +722,7 @@
   </div>
   <div class="footer-disclaimer">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="oklch(60% 0.1 60)" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    <span>To nie jest oficjalne zrodlo prawa. Jedynym autentycznym zrodlem jest Dziennik Ustaw publikowany na <a href="https://isap.sejm.gov.pl" target="_blank" rel="noopener">isap.sejm.gov.pl</a>. Teksty sa generowane automatycznie z PDF-ow ISAP i moga zawierac bledy ekstrakcji.</span>
+    <span>To nie jest oficjalne źródło prawa. Jedynym autentycznym źródłem jest Dziennik Ustaw publikowany na <a href="https://isap.sejm.gov.pl" target="_blank" rel="noopener">isap.sejm.gov.pl</a>. Teksty są generowane automatycznie z PDF-ów ISAP i mogą zawierać błędy ekstrakcji.</span>
   </div>
 </footer>
 
