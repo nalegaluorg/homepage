@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Polityka cookies - nalegalu.org</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --navy:#1b2e4b;--navy-mid:#253d61;--cream:#faf9f7;--cream2:#f3f1ec;--white:#fff;
+      --amber:oklch(72% 0.16 72);--amber-dark:oklch(60% 0.16 72);--teal:oklch(52% 0.13 192);
+      --text:#1b2e4b;--text-mid:#3d5070;--text-light:#6b7fa3;--border:#dde3ed;
+      --serif:'Lora',Georgia,serif;--sans:'Inter',system-ui,sans-serif;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:var(--sans);background:var(--white);color:var(--text);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+    .topbar{position:sticky;top:0;z-index:50;height:60px;display:flex;align-items:center;gap:1rem;padding:0 clamp(1.25rem,5vw,2.5rem);background:rgba(250,249,247,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+    .topbar-logo{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--navy)}
+    .topbar-logo img{height:30px;width:30px;object-fit:contain;border-radius:6px}
+    .topbar-logo span{font-family:var(--serif);font-size:1rem;font-weight:600}
+    .topbar-links{margin-left:auto;display:flex;gap:1.25rem}
+    .topbar-links a{font-size:.85rem;font-weight:500;color:var(--text-mid);text-decoration:none}
+    .topbar-links a:hover{color:var(--navy)}
+    main{max-width:760px;margin:0 auto;padding:3rem clamp(1.25rem,5vw,2rem) 5rem}
+    .breadcrumb{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text-light);margin-bottom:1.5rem}
+    .breadcrumb a{color:var(--text-light);text-decoration:none}.breadcrumb a:hover{color:var(--teal)}
+    h1{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:700;letter-spacing:-.02em;line-height:1.15;color:var(--navy);margin-bottom:.75rem;text-wrap:pretty}
+    .lead{font-size:1.05rem;color:var(--text-mid);line-height:1.75;margin-bottom:2rem;padding-bottom:1.75rem;border-bottom:1px solid var(--border)}
+    h2{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--navy);margin:2.25rem 0 .75rem;letter-spacing:-.01em}
+    p{font-size:.95rem;color:var(--text-mid);line-height:1.8;margin-bottom:1rem}
+    ul{padding-left:1.25rem;margin-bottom:1rem}
+    li{font-size:.95rem;color:var(--text-mid);line-height:1.75;margin-bottom:.3rem}
+    strong{color:var(--text);font-weight:600}
+    a{color:var(--teal);text-underline-offset:2px}
+    a:hover{color:var(--amber-dark)}
+    table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.85rem}
+    th{text-align:left;padding:10px 12px;background:var(--cream2);color:var(--navy);font-weight:600;border-bottom:2px solid var(--border);vertical-align:top}
+    td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text-mid);vertical-align:top;line-height:1.5}
+    code{font-family:ui-monospace,Menlo,monospace;font-size:.85em;background:rgba(0,0,0,.06);padding:1px 5px;border-radius:4px;color:var(--navy)}
+    .btn{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:var(--white);padding:9px 18px;border:none;border-radius:8px;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;text-decoration:none;margin:.5rem 0}
+    .btn:hover{background:var(--navy-mid);color:var(--white)}
+    footer{border-top:1px solid var(--border);background:var(--cream);padding:1.5rem clamp(1.25rem,5vw,2.5rem)}
+    .foot-inner{max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;align-items:center;justify-content:space-between;font-size:.82rem;color:var(--text-light)}
+    .foot-links{display:flex;flex-wrap:wrap;gap:1.25rem}
+    footer a{color:var(--text-mid);text-decoration:none}
+    footer a:hover{color:var(--navy);text-decoration:underline}
+    .table-wrap{overflow-x:auto}
+  </style>
+  <script src="consent.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a href="index.html" class="topbar-logo"><img src="uploads/logo.jpeg" alt="nalegalu" /><span>nalegalu</span></a>
+    <nav class="topbar-links" aria-label="Główna">
+      <a href="index.html">Strona główna</a>
+      <a href="docs.html">Dokumentacja</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="breadcrumb"><a href="index.html">nalegalu.org</a> › <span>Polityka cookies</span></div>
+    <h1>Polityka cookies</h1>
+    <p class="lead">Ta strona wyjaśnia, czym są pliki cookies i podobne technologie, z jakich kategorii korzystamy oraz jak możesz zarządzać swoimi zgodami lub je wycofać.</p>
+
+    <h2>Czym są pliki cookies</h2>
+    <p>Pliki cookies to niewielkie pliki tekstowe zapisywane w Twojej przeglądarce podczas odwiedzania stron internetowych. Umożliwiają m.in. zapewnienie bezpieczeństwa, zapamiętanie preferencji oraz — za Twoją zgodą — analizę ruchu. Obok cookies używamy też pamięci lokalnej przeglądarki (localStorage) do zapisania Twojego wyboru zgód.</p>
+
+    <h2>Kategorie, z których korzystamy</h2>
+    <ul>
+      <li><strong>Niezbędne</strong> — konieczne do prawidłowego i bezpiecznego działania strony. Nie wymagają zgody i są zawsze aktywne.</li>
+      <li><strong>Analityczne</strong> — Google Analytics, pomaga nam zrozumieć, jak używana jest strona. Są <strong>domyślnie wyłączone</strong> i uruchamiają się dopiero po wyrażeniu przez Ciebie zgody (opt-in).</li>
+    </ul>
+
+    <h2>Szczegółowy wykaz</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Nazwa</th><th>Dostawca</th><th>Cel</th><th>Czas przechowywania</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>__cf_bm</code></td>
+            <td>Cloudflare</td>
+            <td>Niezbędne — ochrona przed botami i zabezpieczenie ruchu na stronie.</td>
+            <td>ok. 30 minut</td>
+          </tr>
+          <tr>
+            <td><code>cf_clearance</code></td>
+            <td>Cloudflare</td>
+            <td>Niezbędne — potwierdzenie przejścia weryfikacji bezpieczeństwa.</td>
+            <td>do 1 roku</td>
+          </tr>
+          <tr>
+            <td><code>_ga</code></td>
+            <td>Google Analytics</td>
+            <td>Analityczne — rozróżnianie użytkowników (anonimowe statystyki).</td>
+            <td>2 lata</td>
+          </tr>
+          <tr>
+            <td><code>_ga_&lt;ID&gt;</code></td>
+            <td>Google Analytics</td>
+            <td>Analityczne — utrzymanie stanu sesji pomiarowej.</td>
+            <td>2 lata</td>
+          </tr>
+          <tr>
+            <td><code>nalegalu_consent</code></td>
+            <td>nalegalu.org (pamięć lokalna)</td>
+            <td>Niezbędne — zapamiętanie Twojego wyboru zgód, aby nie pytać przy każdej wizycie.</td>
+            <td>do wyczyszczenia przez użytkownika</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Google Analytics działa w trybie Google Consent Mode v2 — do czasu wyrażenia zgody sygnały pomiarowe pozostają w stanie „denied", a pliki <code>_ga</code> nie są ustawiane.</p>
+
+    <h2>Jak zarządzać zgodą lub ją wycofać</h2>
+    <p>W dowolnym momencie możesz zmienić lub wycofać zgodę, klikając poniższy przycisk albo link <strong>„Ustawienia cookies"</strong> w stopce strony:</p>
+    <p><button type="button" class="btn" onclick="nalegaluOpenConsent()">Otwórz ustawienia cookies</button></p>
+    <p>Możesz też zarządzać plikami cookies w ustawieniach swojej przeglądarki — usunąć zapisane pliki lub zablokować ich zapisywanie. Pomoc dla popularnych przeglądarek znajdziesz w ich dokumentacji (Chrome, Firefox, Safari, Edge).</p>
+
+    <h2>Więcej informacji</h2>
+    <p>Zasady przetwarzania danych osobowych opisujemy w <a href="polityka-prywatnosci.html">Polityce prywatności</a>.</p>
+  </main>
+
+  <footer>
+    <div class="foot-inner">
+      <span>© nalegalu.org</span>
+      <nav class="foot-links" aria-label="Stopka">
+        <a href="index.html">Strona główna</a>
+        <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+        <a href="polityka-cookies.html">Polityka cookies</a>
+        <a href="#" onclick="nalegaluOpenConsent();return false;">Ustawienia cookies</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

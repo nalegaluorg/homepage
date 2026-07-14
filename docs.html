@@ -468,14 +468,8 @@
       .topnav-search { max-width: none; }
     }
   </style>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMEB28MEH6"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-ZMEB28MEH6');
-  </script>
+  <!-- Cookie consent + Google Consent Mode v2 (GA loads only after opt-in) -->
+  <script src="consent.js"></script>
 </head>
 <body>
 
@@ -512,6 +506,16 @@
       <a href="#" class="sidebar-link active" data-section="intro" onclick="showSection('intro',this);return false;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
         Od czego zacząć
+      </a>
+    </div>
+
+    <div class="sidebar-sep"></div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-group-label">Serwer MCP</div>
+      <a href="#mcp" class="sidebar-link" data-section="mcp" onclick="showSection('mcp',this);return false;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/><circle cx="4" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg>
+        Nalegalu MCP <span class="sidebar-badge">Nowość</span>
       </a>
     </div>
 
@@ -933,7 +937,7 @@ ZASADY PRACY:
         </div>
 
         <h2 class="doc-h2" id="zp-brak">Brak w bazie ≠ brak orzeczenia</h2>
-        <p class="doc-p">Baza nalegalu zawiera orzeczenia z systemu SAOS, ale nie jest kompletna. Jeśli AI nie znajdzie konkretnego orzeczenia, nie znaczy, że ono nie istnieje. Zaznaczaj w odpowiedzi: „wg bazy nalegalu" lub „nie znaleziono w bazie nalegalu" — to uczciwe wobec klienta i bezpieczne prawnie.</p>
+        <p class="doc-p">Baza nalegalu zawiera orzeczenia z systemu SAOS, ale nie jest kompletna. Jeśli AI nie znajdzie konkretnego orzeczenia, nie znaczy, że ono nie istnieje.</p>
 
         <div class="doc-pagination">
           <a href="#" class="page-btn" onclick="showSection('instrukcje-projektu', document.querySelector('[data-section=instrukcje-projektu]'));return false;">
@@ -1404,6 +1408,137 @@ Na podstawie plików nalegalu:
         <p class="page-disclaimer">To nie jest oficjalne źródło prawa. Jedynym autentycznym źródłem jest Dziennik Ustaw publikowany na <a href="https://isap.sejm.gov.pl" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">isap.sejm.gov.pl</a>. Teksty są generowane automatycznie z PDF-ów ISAP i mogą zawierać błędy ekstrakcji.</p>
       </div>
 
+      <!-- ═══ MCP ═══ -->
+      <div class="doc-section" id="sec-mcp">
+        <div class="breadcrumb">
+          <a href="index.html">nalegalu.org</a>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <span>Serwer MCP</span>
+        </div>
+        <div class="doc-eyebrow">Serwer MCP</div>
+        <h1 class="doc-title">Nalegalu MCP — podłącz prawo do swojego AI</h1>
+        <p class="doc-lead">Jeden adres, który zamienia Twojego asystenta AI w wyszukiwarkę polskiego prawa. Model przestaje zgadywać treść przepisów, a zaczyna cytować konkretny artykuł obowiązującej ustawy — z odnośnikiem do źródła.</p>
+
+        <h2 class="doc-h2" id="mcp-co-to">Co to jest</h2>
+        <p class="doc-p">MCP (Model Context Protocol) to otwarty standard, dzięki któremu asystenci AI łączą się z zewnętrznymi narzędziami. Nalegalu udostępnia publiczny serwer MCP, który daje modelowi semantyczną wyszukiwarkę obowiązujących ustaw i dekretów oraz dostęp do powiązanego orzecznictwa.</p>
+        <p class="doc-p">Po podłączeniu Twój asystent potrafi m.in.:</p>
+        <ul class="doc-ul">
+          <li>znaleźć właściwy przepis na podstawie opisu problemu (a nie tylko słów kluczowych),</li>
+          <li>zacytować artykuł w gotowej formie (np. „Art. 121 Kodeksu cywilnego, Dz.U. 1964 nr 16 poz. 93"),</li>
+          <li>pokazać powiązane orzeczenia z bazy SAOS, z oceną ważności,</li>
+          <li>pobrać dokładną treść wskazanego artykułu lub konkretnego wyroku.</li>
+        </ul>
+        <p class="doc-p">Adres serwera:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Endpoint MCP</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+          <pre>https://mcp.nalegalu.org/mcp</pre>
+        </div>
+        <p class="doc-p">Usługa jest darmowa i otwarta, zabezpieczona limitami zapytań. Transport: streamable HTTP, bez uwierzytelniania.</p>
+
+        <h2 class="doc-h2" id="mcp-narzedzia">Co potrafi (narzędzia)</h2>
+        <ul class="doc-ul">
+          <li><strong>search_law</strong> — semantyczne wyszukiwanie w obowiązujących ustawach; zwraca trafienia na poziomie artykułu z gotowym cytowaniem, linkiem do źródła i sygnałami orzeczniczymi.</li>
+          <li><strong>get_article</strong> — deterministyczne pobranie treści artykułu (lub pojedynczego paragrafu) po adresie aktu i numerze — prosto ze źródła, bez wyszukiwania.</li>
+          <li><strong>related_cases</strong> — lista orzeczeń SAOS powiązanych z danym artykułem, z oceną ważności.</li>
+          <li><strong>get_case</strong> — pobranie metadanych i treści konkretnego orzeczenia z SAOS po jego identyfikatorze.</li>
+          <li><strong>health</strong> — status usługi i podłączonej kolekcji.</li>
+        </ul>
+
+        <h2 class="doc-h2" id="mcp-podlacz">Jak podłączyć</h2>
+
+        <h3 class="doc-h3">Claude Desktop</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><p>Otwórz <strong>Ustawienia → Konektory (Connectors)</strong>.</p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><p>Kliknij <strong>Dodaj → Dodaj własny konektor (Add custom connector)</strong>.</p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><p>Wklej adres: <code class="inline">https://mcp.nalegalu.org/mcp</code></p></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><p>Pola OAuth zostaw puste i kliknij <strong>Dodaj</strong>.</p></div></div>
+        </div>
+        <p class="doc-p">Claude łączy się z serwerem z infrastruktury Anthropic (nie z Twojego komputera), dlatego serwer musi być publicznie dostępny — i jest.</p>
+
+        <h3 class="doc-h3">Claude Code (terminal)</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Bash</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+          <pre>claude mcp add --transport http nalegalu https://mcp.nalegalu.org/mcp</pre>
+        </div>
+
+        <h3 class="doc-h3">ChatGPT</h3>
+        <p class="doc-p">Obsługa własnych serwerów MCP wymaga planu płatnego i włączonego <strong>trybu deweloperskiego</strong> (Developer mode, wersja beta).</p>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><p>W <strong>Ustawieniach</strong> włącz <strong>tryb deweloperski</strong> (sekcja Konektory / Bezpieczeństwo). W planach zespołowych administrator musi najpierw włączyć tę opcję w ustawieniach organizacji.</p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><p>Przejdź do konektorów i utwórz nowy konektor deweloperski.</p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><p>Podaj nazwę oraz adres serwera MCP: <code class="inline">https://mcp.nalegalu.org/mcp</code></p></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><p>Zapisz i włącz konektor w rozmowie.</p></div></div>
+        </div>
+        <div class="callout warning">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <div class="callout-body">
+            <p>Uwaga: tryb deweloperski jest w wersji beta i daje modelowi realne narzędzia — korzystaj świadomie.</p>
+          </div>
+        </div>
+
+        <h3 class="doc-h3">Gemini</h3>
+        <p class="doc-p">Aplikacja Gemini (web / mobile) na razie <strong>nie obsługuje</strong> własnych zdalnych serwerów MCP. Czystą ścieżką jest <strong>Gemini CLI</strong>:</p>
+        <p class="doc-p">Dodaj wpis do pliku <code class="inline">~/.gemini/settings.json</code> (lub <code class="inline">.gemini/settings.json</code> w katalogu projektu):</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">JSON</span><button class="code-copy" onclick="copyCode(this)">Kopiuj</button></div>
+          <pre>{
+  "mcpServers": {
+    "nalegalu": {
+      "httpUrl": "https://mcp.nalegalu.org/mcp"
+    }
+  }
+}</pre>
+        </div>
+        <p class="doc-p">Uruchom <code class="inline">gemini</code>, a następnie wpisz <code class="inline">/mcp</code>, aby sprawdzić, że serwer jest podłączony i narzędzia są widoczne.</p>
+
+        <h3 class="doc-h3">Dowolny inny klient MCP</h3>
+        <ul class="doc-ul">
+          <li>Adres: <code class="inline">https://mcp.nalegalu.org/mcp</code></li>
+          <li>Transport: streamable HTTP</li>
+          <li>Uwierzytelnianie: brak</li>
+        </ul>
+
+        <h2 class="doc-h2" id="mcp-pytania">Przykładowe pytania</h2>
+        <p class="doc-p">Po podłączeniu zapytaj asystenta zwykłym językiem — sam sięgnie do wyszukiwarki:</p>
+        <ul class="doc-ul">
+          <li>„Jaki jest termin przedawnienia roszczeń majątkowych i kiedy bieg się zawiesza?"</li>
+          <li>„Wypowiedzenie umowy o pracę — jakie są okresy i podstawy?"</li>
+          <li>„Przesłanki stosowania tymczasowego aresztowania."</li>
+          <li>„Pokaż orzecznictwo do art. 123 Kodeksu cywilnego."</li>
+        </ul>
+        <p class="doc-p">W odpowiedzi otrzymasz konkretny artykuł, gotowe cytowanie, link do źródła i — gdy to istotne — powiązane wyroki.</p>
+
+        <h2 class="doc-h2" id="mcp-zakres">Zakres i uczciwość</h2>
+        <ul class="doc-ul">
+          <li>Wyszukiwarka obejmuje <strong>obowiązujące ustawy i dekrety</strong> (~1 300 aktów, ~87 000 artykułów). Akty zmieniające i teksty wchłonięte do tekstów jednolitych są pomijane, żeby nie zaśmiecać wyników duplikatami.</li>
+          <li>Wyniki są wzbogacane o powiązane orzecznictwo z bazy SAOS (824 000+ orzeczeń).</li>
+          <li>Usługa jest darmowa, z limitami zapytań chroniącymi przed nadużyciem.</li>
+        </ul>
+
+        <h2 class="doc-h2" id="mcp-prywatnosc">Prywatność</h2>
+        <p class="doc-p">Serwer MCP przetwarza treść Twoich zapytań wyłącznie po to, by zwrócić trafne przepisy. Aby wyszukiwać semantycznie, treść zapytania jest wysyłana do OpenAI (usługa embeddingów) w celu zamiany na wektor — OpenAI występuje tu jako podmiot przetwarzający, a dane są przekazywane do USA na podstawie standardowych klauzul umownych / Data Privacy Framework. Zgodnie z warunkami API OpenAI dane z API nie są wykorzystywane do trenowania modeli.</p>
+        <p class="doc-p">Nie tworzymy kont, nie wymagamy logowania i nie budujemy profili użytkowników. Adres IP jest przetwarzany doraźnie wyłącznie do limitowania liczby zapytań (ochrona przed nadużyciem). Nie przechowujemy treści zapytań poza standardowymi, krótkotrwałymi logami technicznymi.</p>
+        <p class="doc-p">Nie wysyłaj przez wyszukiwarkę danych, których nie chcesz przekazać zewnętrznemu dostawcy AI. Szczegóły przetwarzania po stronie OpenAI: <a href="https://openai.com/policies/" target="_blank" rel="noopener" style="color:var(--teal)">openai.com/policies</a>.</p>
+
+        <div class="callout warning">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <div class="callout-body">
+            <p>To nie jest oficjalne źródło prawa. Jedynym autentycznym źródłem jest Dziennik Ustaw publikowany na <a href="https://isap.sejm.gov.pl" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">isap.sejm.gov.pl</a>. Teksty są generowane automatycznie z PDF-ów ISAP i mogą zawierać błędy ekstrakcji — zawsze weryfikuj cytowany przepis w źródle.</p>
+          </div>
+        </div>
+
+        <div class="doc-pagination">
+          <a href="#" class="page-btn" onclick="showSection('intro', document.querySelector('[data-section=intro]'));return false;">
+            <span class="pb-label">← Poprzednia strona</span>
+            <span class="pb-title">Od czego zacząć</span>
+          </a>
+          <a href="#" class="page-btn next" onclick="showSection('claude-cowork', document.querySelector('[data-section=claude-cowork]'));return false;">
+            <span class="pb-label">Następna strona</span>
+            <span class="pb-title">Claude Cowork →</span>
+          </a>
+        </div>
+      </div>
+
     </div>
 
     <nav class="docs-toc" id="docsToc">
@@ -1412,6 +1547,25 @@ Na podstawie plików nalegalu:
     </nav>
   </div>
 </div>
+
+<footer class="docs-footer">
+  <div class="docs-footer-inner">
+    <span>© nalegalu.org · Dane na licencji <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0 1.0</a></span>
+    <nav class="docs-footer-links" aria-label="Stopka">
+      <a href="index.html">Strona główna</a>
+      <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+      <a href="polityka-cookies.html">Polityka cookies</a>
+      <a href="#" onclick="nalegaluOpenConsent();return false;">Ustawienia cookies</a>
+    </nav>
+  </div>
+</footer>
+<style>
+  .docs-footer { border-top: 1px solid var(--border); background: var(--cream); padding: 1.25rem 1.5rem; }
+  .docs-footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; align-items: center; justify-content: space-between; font-size: 0.82rem; color: var(--text-light); }
+  .docs-footer-links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+  .docs-footer a { color: var(--text-mid); text-decoration: none; }
+  .docs-footer a:hover { color: var(--navy); text-decoration: underline; }
+</style>
 
 
 <script>
@@ -1429,6 +1583,7 @@ Na podstawie plików nalegalu:
 
     buildToc(sec);
     window.scrollTo({ top: 0, behavior: 'instant' });
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
 
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebarOverlay').classList.remove('open');
@@ -1456,6 +1611,15 @@ Na podstawie plików nalegalu:
 
   buildToc(document.getElementById('sec-intro'));
 
+  (function initFromHash(){
+    const h = (location.hash || '').replace('#', '');
+    if (h && document.getElementById('sec-' + h)) showSection(h, null);
+  })();
+  window.addEventListener('hashchange', function(){
+    const h = (location.hash || '').replace('#', '');
+    if (h && document.getElementById('sec-' + h)) showSection(h, null);
+  });
+
   document.getElementById('sidebarToggle').onclick = function() {
     document.getElementById('sidebar').classList.toggle('open');
     document.getElementById('sidebarOverlay').classList.toggle('open');
@@ -1475,6 +1639,7 @@ Na podstawie plików nalegalu:
 
   const searchIndex = [
     { section:'intro',                title:'Od czego zacząć',          text:'wprowadzenie quick start trzy kroki', excerpt:'Trzy kroki do pracy z bazą nalegalu.' },
+    { section:'mcp',                  title:'Nalegalu MCP',             text:'mcp serwer model context protocol wyszukiwarka semantyczna endpoint search_law get_article related_cases get_case claude chatgpt gemini orzecznictwo cytowanie', excerpt:'Podłącz polskie prawo do swojego asystenta AI przez serwer MCP.' },
     { section:'claude-cowork',        title:'Claude Cowork',            text:'claude cowork desktop konfiguracja krok po kroku zip git folder', excerpt:'Pełna instrukcja konfiguracji Claude Cowork.' },
     { section:'inne-narzedzia',       title:'Inne narzędzia',           text:'obsidian cursor chatgpt wkrótce', excerpt:'Planowane instrukcje dla kolejnych narzędzi.' },
     { section:'instrukcje-projektu',  title:'Instrukcje projektu',      text:'project instructions naucz AI bazy struktura plików score halucynacje', excerpt:'Gotowy tekst do wklejenia w ustawieniach Cowork.' },
