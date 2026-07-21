@@ -1,0 +1,36 @@
+# nalegalu.org
+
+> Otwarte, ustrukturyzowane polskie prawo dla ludzi i AI. Udostępniamy całe polskie ustawodawstwo (ponad 5 700 aktów z lat 1918–2025 z Dziennika Ustaw i ISAP) oraz ponad 824 000 orzeczeń sądowych z bazy SAOS w formatach gotowych do przeszukiwania, cytowania i integracji z narzędziami AI. Wszystkie dane na licencji CC0 (domena publiczna, bez ograniczeń).
+
+nalegalu.org to publiczna strona projektu. Dane i narzędzia znajdują się w osobnym repozytorium na GitHub. Treść serwisu jest w języku polskim. To nie jest oficjalne źródło prawa — jedynym autentycznym źródłem jest Dziennik Ustaw publikowany na isap.sejm.gov.pl.
+
+## Serwer MCP (dla asystentów AI)
+
+- [Nalegalu MCP — dokumentacja](https://nalegalu.org/docs.html#mcp): Jak podłączyć hostowany serwer MCP do Claude, ChatGPT lub Gemini. Endpoint: https://mcp.nalegalu.org/mcp (streamable HTTP, bez uwierzytelniania, darmowy z limitami zapytań). Semantyczna wyszukiwarka obowiązujących ustaw z cytowaniem konkretnego artykułu i powiązanym orzecznictwem.
+- Narzędzia MCP: `search_law` (wyszukiwanie semantyczne), `get_article` (treść artykułu), `related_cases` (powiązane orzeczenia SAOS), `get_case` (treść orzeczenia), `health` (status usługi).
+
+## Dane i kod
+
+- [Repozytorium na GitHub](https://github.com/nalegaluorg/nalegalu): Ustrukturyzowane pliki Markdown z metadanymi, wzajemnymi odniesieniami między aktami i orzecznictwem. Gotowe do RAG, fine-tuningu i okien kontekstowych LLM. CSV per artykuł, JSON metadata, cross-references, scoring ważności orzeczeń. Licencja CC0.
+
+## Dokumentacja
+
+- [Dokumentacja](https://nalegalu.org/docs.html): Przewodnik po korzystaniu z danych nalegalu z asystentami AI.
+- [Od czego zacząć](https://nalegalu.org/docs.html#intro): Trzy kroki do pracy z bazą nalegalu.
+- [Claude Cowork](https://nalegalu.org/docs.html#claude-cowork): Pełna instrukcja konfiguracji Claude Cowork z danymi nalegalu.
+- [Instrukcje projektu](https://nalegalu.org/docs.html#instrukcje-projektu): Gotowy tekst do wklejenia w ustawieniach, który uczy AI struktury bazy.
+- [Zasady dobrej pracy](https://nalegalu.org/docs.html#zasady-pracy): Praktyki dające precyzyjne odpowiedzi (weryfikacja sygnatur, status, score, unikanie halucynacji).
+- [Biblioteka promptów](https://nalegalu.org/docs.html#prompty): Sprawdzone szablony zapytań do typowych zadań prawnych.
+- [Rozwiązywanie problemów](https://nalegalu.org/docs.html#problemy): Najczęstsze problemy i sposoby ich rozwiązania.
+- [Wkład społeczności](https://nalegalu.org/docs.html#wklad): Jak dodać własne prompty i instrukcje.
+
+## Formaty
+
+- [Markdown / AI-ready](https://github.com/nalegaluorg/nalegalu): Dane dla deweloperów i AI — RAG, fine-tuning, metadata, cross-references.
+- [Podcast na Apple](https://podcasts.apple.com/us/podcast/nalegalu/id1892974960): Najważniejsze akty prawne w formie audio.
+- [Podcast na Spotify](https://open.spotify.com/show/1HFNYVb5Md7ndxLxFkuGfz): Najważniejsze akty prawne w formie audio.
+
+## Informacje prawne
+
+- [Polityka prywatności](https://nalegalu.org/polityka-prywatnosci.html)
+- [Polityka cookies](https://nalegalu.org/polityka-cookies.html)

@@ -4,6 +4,95 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>nalegalu.org, Prawo dostępne dla ludzi i AI</title>
+  <meta name="description" content="nalegalu.org udostępnia całe polskie prawo i orzecznictwo jako otwarte, gotowe dla AI dane (Markdown, podcast, serwer MCP). Ponad 5 700 aktów prawnych i 824 000+ orzeczeń sądowych na licencji CC0." />
+  <link rel="canonical" href="https://nalegalu.org/" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#1b2e4b" />
+
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="nalegalu.org" />
+  <meta property="og:title" content="nalegalu.org — Prawo dostępne dla ludzi i AI" />
+  <meta property="og:description" content="Otwarte, ustrukturyzowane polskie prawo i orzecznictwo dla ludzi i asystentów AI. Markdown, podcast i hostowany serwer MCP. Licencja CC0." />
+  <meta property="og:url" content="https://nalegalu.org/" />
+  <meta property="og:image" content="https://nalegalu.org/uploads/logo.jpeg" />
+  <meta name="twitter:card" content="summary" />
+
+  <!-- JSON-LD: structured data for search & AI engines (GEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://nalegalu.org/#organization",
+        "name": "nalegalu",
+        "alternateName": "nalegalu.org",
+        "url": "https://nalegalu.org/",
+        "logo": "https://nalegalu.org/uploads/logo.jpeg",
+        "description": "Projekt udostępniający polskie akty prawne i orzecznictwo jako otwarte, gotowe dla AI dane.",
+        "sameAs": ["https://github.com/nalegaluorg/nalegalu"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://nalegalu.org/#website",
+        "url": "https://nalegalu.org/",
+        "name": "nalegalu.org",
+        "inLanguage": "pl",
+        "description": "Prawo dostępne dla ludzi i AI. Polskie ustawodawstwo i orzecznictwo w otwartych, ustrukturyzowanych formatach.",
+        "publisher": { "@id": "https://nalegalu.org/#organization" }
+      },
+      {
+        "@type": "Dataset",
+        "@id": "https://nalegalu.org/#dataset",
+        "name": "nalegalu — polskie prawo i orzecznictwo jako otwarte dane",
+        "description": "Całe polskie ustawodawstwo (ponad 5 700 aktów z lat 1918–2025, pobranych z Dziennika Ustaw i ISAP) oraz ponad 824 000 orzeczeń sądowych z bazy SAOS, znormalizowane i połączone wzajemnymi odniesieniami. Ustrukturyzowane pliki Markdown z metadanymi, gotowe do RAG, fine-tuningu i integracji z LLM.",
+        "url": "https://nalegalu.org/",
+        "inLanguage": "pl",
+        "keywords": ["polskie prawo", "ustawy", "rozporządzenia", "orzecznictwo", "SAOS", "Dziennik Ustaw", "ISAP", "legal data", "RAG", "open data", "AI-ready"],
+        "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "isAccessibleForFree": true,
+        "creator": { "@id": "https://nalegalu.org/#organization" },
+        "distribution": [
+          {
+            "@type": "DataDownload",
+            "encodingFormat": "text/markdown",
+            "contentUrl": "https://github.com/nalegaluorg/nalegalu"
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "@id": "https://nalegalu.org/#sourcecode",
+        "name": "nalegalu",
+        "description": "Otwarte narzędzia i dane do pobierania, normalizacji i publikacji polskiego prawa i orzecznictwa w formatach gotowych dla AI.",
+        "codeRepository": "https://github.com/nalegaluorg/nalegalu",
+        "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "programmingLanguage": "Python",
+        "author": { "@id": "https://nalegalu.org/#organization" }
+      },
+      {
+        "@type": ["SoftwareApplication", "WebAPI"],
+        "@id": "https://nalegalu.org/#mcp",
+        "name": "Nalegalu MCP",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any (Model Context Protocol client)",
+        "description": "Hostowany serwer MCP (Model Context Protocol) z semantycznym wyszukiwaniem obowiązujących polskich ustaw i dekretów oraz powiązanego orzecznictwa. Pozwala asystentom AI (Claude, ChatGPT, Gemini) odpytywać prawo na żywo i cytować konkretny artykuł z odnośnikiem do źródła. Narzędzia: search_law, get_article, related_cases, get_case, health.",
+        "url": "https://nalegalu.org/docs.html#mcp",
+        "featureList": ["search_law", "get_article", "related_cases", "get_case", "health"],
+        "provider": { "@id": "https://nalegalu.org/#organization" },
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "PLN" },
+        "documentation": "https://nalegalu.org/docs.html#mcp"
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -111,7 +200,8 @@
     }
     .hero-inner {
       position: relative; z-index: 1;
-      max-width: 780px;
+      max-width: 1100px;
+      margin: 0 auto;
     }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
@@ -129,6 +219,7 @@
       font-weight: 700; line-height: 1.15;
       letter-spacing: -0.02em;
       margin-bottom: 1.5rem;
+      max-width: 780px;
       text-wrap: pretty;
     }
     .hero h1 em { font-style: italic; color: oklch(72% 0.16 72); }

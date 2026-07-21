@@ -1,0 +1,80 @@
+# nalegalu.org — pełny kontekst dla AI
+
+> Otwarte, ustrukturyzowane polskie prawo dla ludzi i AI. Całe polskie ustawodawstwo (ponad 5 700 aktów z lat 1918–2025) oraz ponad 824 000 orzeczeń sądowych z bazy SAOS, w formatach gotowych do przeszukiwania, cytowania i integracji z narzędziami AI. Licencja CC0 (domena publiczna).
+
+Ten plik zawiera pełniejszy opis projektu nalegalu.org przeznaczony do odczytu przez modele językowe i boty AI. Treść serwisu jest w języku polskim.
+
+## Czym jest nalegalu
+
+Polskie prawo jest publiczne, ale ukryte w plikach PDF i nieporęcznych stronach rządowych. nalegalu pobiera całe polskie prawodawstwo i orzecznictwo, a następnie udostępnia je w nowoczesnej, ustrukturyzowanej postaci: gotowej do przeszukiwania, cytowania i integracji z narzędziami AI, z których korzystają prawnicy i obywatele.
+
+Kiedy zadajesz AI pytanie prawne, model powinien cytować konkretny artykuł z obowiązującej ustawy, a nie domyślać się treści przepisów. nalegalu dostarcza warstwę danych, która to umożliwia: prawdziwą, aktualną i otwartą.
+
+nalegalu.org to wyłącznie publiczna strona projektu. Dane i narzędzia znajdują się w osobnym repozytorium: https://github.com/nalegaluorg/nalegalu
+
+## Co zawiera baza
+
+- Wszystkie akty prawne: ponad 5 700 ustaw, rozporządzeń i obwieszczeń z lat 1918–2025, pobrane z Dziennika Ustaw i ISAP, ze znormalizowaną strukturą.
+- Orzecznictwo sądowe: ponad 824 000 orzeczeń z bazy SAOS, od Trybunału Konstytucyjnego po sądy okręgowe, powiązanych z konkretnymi artykułami ustaw. Każde orzeczenie ma score ważności — wyroki TK i uchwały SN na górze, orzeczenia pomocnicze na dole.
+- Otwarte licencje: wszystkie dane na licencji CC0, bez ograniczeń — można je pobierać, używać, modyfikować i dystrybuować w dowolnym celu, komercyjnym lub nie.
+- Automatyczna aktualizacja: zmiany w prawie odzwierciedlają się w danych automatycznie, dzięki czemu narzędzia AI pracują na aktualnym stanie prawnym.
+
+## Serwer MCP (Nalegalu MCP)
+
+MCP (Model Context Protocol) to otwarty standard łączenia asystentów AI z zewnętrznymi narzędziami. nalegalu udostępnia publiczny, hostowany serwer MCP, który daje modelowi semantyczną wyszukiwarkę obowiązujących ustaw i dekretów oraz dostęp do powiązanego orzecznictwa. Zamiast pobierać pliki, asystent AI odpytuje prawo w czasie rzeczywistym i cytuje konkretny artykuł — z odnośnikiem do źródła.
+
+- Endpoint: https://mcp.nalegalu.org/mcp
+- Transport: streamable HTTP, bez uwierzytelniania, bez klucza API.
+- Koszt: darmowy, zabezpieczony limitami zapytań.
+- Działa z: Claude, ChatGPT, Gemini i innymi klientami MCP.
+- Dokumentacja i instrukcja podłączenia: https://nalegalu.org/docs.html#mcp
+
+Narzędzia serwera MCP:
+
+- `search_law` — semantyczne wyszukiwanie w obowiązujących ustawach; zwraca trafienia na poziomie artykułu z gotowym cytowaniem, linkiem do źródła i sygnałami orzeczniczymi.
+- `get_article` — deterministyczne pobranie treści artykułu (lub pojedynczego paragrafu) po adresie aktu i numerze, prosto ze źródła.
+- `related_cases` — lista orzeczeń SAOS powiązanych z danym artykułem, z oceną ważności.
+- `get_case` — pobranie metadanych i treści konkretnego orzeczenia z SAOS po jego identyfikatorze.
+- `health` — status usługi i podłączonej kolekcji.
+
+Zakres wyszukiwarki MCP: obejmuje obowiązujące ustawy i dekrety (~1 300 aktów, ~87 000 artykułów). Akty zmieniające i teksty wchłonięte do tekstów jednolitych są pomijane, aby nie zaśmiecać wyników duplikatami. Wyniki są wzbogacane o powiązane orzecznictwo z bazy SAOS (824 000+ orzeczeń).
+
+Prywatność MCP: aby wyszukiwać semantycznie, treść zapytania jest wysyłana do OpenAI (usługa embeddingów) w celu zamiany na wektor. Serwer nie tworzy kont ani profili użytkowników; adres IP jest przetwarzany doraźnie wyłącznie do limitowania zapytań. Nie wysyłaj przez wyszukiwarkę danych, których nie chcesz przekazać zewnętrznemu dostawcy AI.
+
+## Formaty danych
+
+- Markdown / AI-ready: ustrukturyzowane pliki Markdown z metadanymi, wzajemnymi odniesieniami między aktami i orzecznictwem. Gotowe do RAG, fine-tuningu i okien kontekstowych LLM. Dostępne: CSV per artykuł, JSON metadata, cross-references, scoring orzeczeń. Pobierz z GitHub: https://github.com/nalegaluorg/nalegalu
+- Podcast / audio: najważniejsze akty prawne w formie audio (MP3, RSS), z myślą o dostępności. Apple Podcasts: https://podcasts.apple.com/us/podcast/nalegalu/id1892974960 — Spotify: https://open.spotify.com/show/1HFNYVb5Md7ndxLxFkuGfz
+- MCP / wyszukiwarka na żywo: hostowany serwer MCP (opis wyżej).
+- Społeczność (wkrótce): planowana prywatna społeczność Discord wokół praktycznego wykorzystania AI w prawie i compliance — prompty, case studies, AI governance.
+
+## Dokumentacja
+
+Dokumentacja: https://nalegalu.org/docs.html — sekcje:
+
+- Od czego zacząć (#intro): trzy kroki do pracy z bazą nalegalu.
+- Nalegalu MCP (#mcp): podłączenie serwera MCP do asystenta AI.
+- Claude Cowork (#claude-cowork): pełna instrukcja konfiguracji Claude Cowork z danymi nalegalu.
+- Inne narzędzia (#inne-narzedzia): planowane instrukcje dla Obsidian, Cursor, ChatGPT.
+- Instrukcje projektu (#instrukcje-projektu): gotowy tekst do wklejenia w ustawieniach, który uczy AI struktury bazy.
+- Zasady dobrej pracy (#zasady-pracy): praktyki dające precyzyjne odpowiedzi — weryfikacja sygnatur, status, score, unikanie halucynacji.
+- Biblioteka promptów (#prompty): sprawdzone szablony zapytań do typowych zadań prawnych.
+- Rozwiązywanie problemów (#problemy): najczęstsze problemy i sposoby ich rozwiązania.
+- Wkład społeczności (#wklad): jak dodać własne prompty i instrukcje.
+
+## Zasada uczciwości i zastrzeżenie prawne
+
+Baza nalegalu zawiera orzeczenia z systemu SAOS, ale nie jest kompletna. Jeśli AI nie znajdzie konkretnego orzeczenia, nie znaczy to, że ono nie istnieje.
+
+To nie jest oficjalne źródło prawa. Jedynym autentycznym źródłem jest Dziennik Ustaw publikowany na https://isap.sejm.gov.pl. Teksty są generowane automatycznie z PDF-ów ISAP i mogą zawierać błędy ekstrakcji — zawsze weryfikuj cytowany przepis w źródle.
+
+## Linki
+
+- Strona główna: https://nalegalu.org/
+- Dokumentacja: https://nalegalu.org/docs.html
+- Serwer MCP (dokumentacja): https://nalegalu.org/docs.html#mcp
+- Endpoint MCP: https://mcp.nalegalu.org/mcp
+- Kod i dane (GitHub): https://github.com/nalegaluorg/nalegalu
+- Polityka prywatności: https://nalegalu.org/polityka-prywatnosci.html
+- Polityka cookies: https://nalegalu.org/polityka-cookies.html
+- Licencja danych: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)

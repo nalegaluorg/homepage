@@ -1,0 +1,13 @@
+{
+  "name": "nalegalu.org",
+  "short_name": "nalegalu",
+  "description": "Otwarte polskie prawo dla ludzi i AI.",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#1b2e4b",
+  "background_color": "#faf9f7",
+  "display": "standalone",
+  "lang": "pl"
+}
