@@ -30,6 +30,8 @@
     .topbar-links{margin-left:auto;display:flex;gap:1.25rem}
     .topbar-links a{font-size:.85rem;font-weight:500;color:var(--text-mid);text-decoration:none}
     .topbar-links a:hover{color:var(--navy)}
+    .language-switch{appearance:none;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--navy);cursor:pointer;font:500 .78rem var(--sans);padding:.35rem .55rem}
+    .language-switch:hover{border-color:var(--teal);color:var(--teal)}
     main{max-width:760px;margin:0 auto;padding:3rem clamp(1.25rem,5vw,2rem) 5rem}
     .breadcrumb{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text-light);margin-bottom:1.5rem}
     .breadcrumb a{color:var(--text-light);text-decoration:none}.breadcrumb a:hover{color:var(--teal)}
@@ -51,6 +53,7 @@
     .foot-links{display:flex;flex-wrap:wrap;gap:1.25rem}
     footer a{color:var(--text-mid);text-decoration:none}
     footer a:hover{color:var(--navy);text-decoration:underline}
+    @media (max-width:520px){.topbar{gap:.7rem;padding-inline:1rem}.topbar-links{gap:.75rem}.topbar-links a{font-size:.78rem}.language-switch{padding:.3rem .45rem}}
   </style>
   <script src="consent.js"></script>
 </head>
@@ -58,16 +61,18 @@
   <header class="topbar">
     <a href="index.html" class="topbar-logo"><img src="uploads/logo.jpeg" alt="nalegalu" /><span>nalegalu</span></a>
     <nav class="topbar-links" aria-label="Główna">
-      <a href="index.html">Strona główna</a>
-      <a href="docs.html">Dokumentacja</a>
+      <a href="index.html" data-pl="Strona główna" data-en="Home">Strona główna</a>
+      <a href="docs.html" data-pl="Dokumentacja" data-en="Documentation">Dokumentacja</a>
     </nav>
+    <button class="language-switch" type="button" id="languageSwitch" aria-pressed="false">English</button>
   </header>
 
   <main>
+    <div id="contentPl" lang="pl">
     <div class="breadcrumb"><a href="index.html">nalegalu.org</a> › <span>Polityka prywatności</span></div>
     <h1>Polityka prywatności</h1>
     <p class="lead">Informacja o przetwarzaniu danych osobowych zgodnie z art. 13 RODO (Rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679).</p>
-    <p class="updated">Data ostatniej aktualizacji: 14 lipca 2026 r.</p>
+    <p class="updated">Data ostatniej aktualizacji: 13 sierpnia 2026 r.</p>
 
     <h2>1. Administrator danych</h2>
     <p>Administratorem danych osobowych jest <strong>Joanna Karpińska</strong>, z siedzibą w Warszawie. Kontakt w sprawach danych osobowych: <a href="mailto:asia@nalegalu.org">asia@nalegalu.org</a>.</p>
@@ -76,13 +81,15 @@
     <ul>
       <li><strong>Newsletter</strong> — na podstawie Twojej zgody (art. 6 ust. 1 lit. a RODO).</li>
       <li><strong>Analityka</strong> (Google Analytics) — na podstawie Twojej zgody (art. 6 ust. 1 lit. a RODO).</li>
+      <li><strong>Obsługa serwera MCP</strong> — przetwarzanie treści zapytań wyłącznie w celu zwrócenia trafnych przepisów oraz orzecznictwa.</li>
       <li><strong>Bezpieczeństwo i logi techniczne</strong> — na podstawie prawnie uzasadnionego interesu administratora (art. 6 ust. 1 lit. f RODO).</li>
     </ul>
 
     <h2>3. Zakres danych</h2>
     <ul>
       <li>adres e-mail (newsletter),</li>
-      <li>dane techniczne (m.in. adres IP),</li>
+      <li>treść zapytań przesyłanych do serwera MCP,</li>
+      <li>dane techniczne (m.in. adres IP, wykorzystywany doraźnie do limitowania liczby zapytań),</li>
       <li>dane z narzędzi analitycznych.</li>
     </ul>
 
@@ -96,6 +103,8 @@
       <li>usługi antyspamowe CleanTalk i Akismet (otrzymują adres IP i adres e-mail — USA).</li>
     </ul>
     <p>Podstawa: umowa powierzenia (DPA) oraz standardowe klauzule umowne (SCC). Polityka: <a href="https://web3forms.com/privacy" target="_blank" rel="noopener">https://web3forms.com/privacy</a>.</p>
+    <h3>OpenAI</h3>
+    <p>W celu semantycznego wyszukiwania przepisów treść zapytania przesłanego do serwera MCP jest wysyłana do OpenAI w celu utworzenia wektora (embeddingu). OpenAI występuje jako podmiot przetwarzający. Zgodnie z warunkami API OpenAI dane z API nie są wykorzystywane do trenowania modeli. Szczegóły przetwarzania po stronie OpenAI: <a href="https://openai.com/policies/" target="_blank" rel="noopener">openai.com/policies</a>.</p>
     <h3>Pozostali odbiorcy</h3>
     <ul>
       <li><strong>Zoho</strong> (Zoho Corporation) — wysyłka newslettera i obsługa poczty; adres e-mail przechowywany do czasu wycofania zgody.</li>
@@ -106,7 +115,7 @@
     <p>Dane mogą być przekazywane poza Europejski Obszar Gospodarczy:</p>
     <ul>
       <li>Web3Creative / Web3Forms (Indie),</li>
-      <li>AWS, CleanTalk, Akismet, Zoho, Google, Cloudflare, GitHub (USA).</li>
+      <li>OpenAI, AWS, CleanTalk, Akismet, Zoho, Google, Cloudflare, GitHub (USA).</li>
     </ul>
     <p>Podstawa przekazywania: standardowe klauzule umowne (SCC) / Data Privacy Framework.</p>
 
@@ -115,6 +124,7 @@
       <li>zgłoszenia w Web3Forms — techniczny czas przechowywania do 3 lat (widoczność w panelu do 30 dni w planie darmowym),</li>
       <li>adres e-mail do newslettera — do wycofania zgody,</li>
       <li>dane w Google Analytics — zgodnie z ustawieniami usługi (2–14 miesięcy),</li>
+      <li>treść zapytań do serwera MCP — nie jest przechowywana poza standardowymi, krótkotrwałymi logami technicznymi,</li>
       <li>logi techniczne hostingu i zabezpieczeń — przez Cloudflare i GitHub zgodnie z ich politykami.</li>
     </ul>
 
@@ -123,11 +133,93 @@
     <p>Masz również prawo wniesienia skargi do organu nadzorczego — <strong>Prezesa Urzędu Ochrony Danych Osobowych (PUODO)</strong>.</p>
 
     <h2>8. Dobrowolność podania danych</h2>
-    <p>Podanie danych jest dobrowolne (newsletter). Brak podania adresu e-mail oznacza jedynie brak możliwości otrzymywania newslettera.</p>
+    <p>Podanie danych jest dobrowolne. Brak podania adresu e-mail oznacza jedynie brak możliwości otrzymywania newslettera. Korzystanie z serwera MCP wymaga przekazania treści zapytania; nie wysyłaj przez wyszukiwarkę danych, których nie chcesz przekazać zewnętrznemu dostawcy AI.</p>
+
+    <h2>9. Prywatność serwera MCP</h2>
+    <p>Nie tworzymy kont, nie wymagamy logowania i nie budujemy profili użytkowników serwera MCP. Adres IP jest przetwarzany doraźnie wyłącznie do limitowania liczby zapytań, aby chronić usługę przed nadużyciem.</p>
+    <p>Serwer MCP przetwarza treść Twoich zapytań wyłącznie po to, by zwrócić trafne przepisy. Aby wyszukiwać semantycznie, treść zapytania jest wysyłana do OpenAI (usługa embeddingów) w celu zamiany na wektor. Dane są przekazywane do USA na podstawie standardowych klauzul umownych lub Data Privacy Framework.</p>
 
     <div class="callout">
       <strong>Wycofanie zgody</strong><br>
       Zgodę na analitykę możesz wycofać w każdej chwili przez <a href="#" onclick="nalegaluOpenConsent();return false;">Ustawienia cookies</a>. Zgodę na newsletter wycofasz, pisząc na <a href="mailto:asia@nalegalu.org">asia@nalegalu.org</a> lub korzystając z linku rezygnacji w wiadomości.
+    </div>
+    </div>
+
+    <div id="contentEn" lang="en" hidden>
+      <div class="breadcrumb"><a href="index.html">nalegalu.org</a> › <span>Privacy policy</span></div>
+      <h1>Privacy policy</h1>
+      <p class="lead">Information on the processing of personal data in accordance with Article 13 of the GDPR (Regulation (EU) 2016/679 of the European Parliament and of the Council).</p>
+      <p class="updated">Last updated: 13 August 2026.</p>
+
+      <h2>1. Data controller</h2>
+      <p>The controller of your personal data is <strong>Joanna Karpińska</strong>, based in Warsaw. For matters concerning personal data, contact: <a href="mailto:asia@nalegalu.org">asia@nalegalu.org</a>.</p>
+
+      <h2>2. Purposes and legal bases for processing</h2>
+      <ul>
+        <li><strong>Newsletter</strong> — on the basis of your consent (Article 6(1)(a) GDPR).</li>
+        <li><strong>Analytics</strong> (Google Analytics) — on the basis of your consent (Article 6(1)(a) GDPR).</li>
+        <li><strong>Operation of the MCP server</strong> — processing query content solely to return relevant legislation and case law.</li>
+        <li><strong>Security and technical logs</strong> — on the basis of the controller’s legitimate interest (Article 6(1)(f) GDPR).</li>
+      </ul>
+
+      <h2>3. Categories of data</h2>
+      <ul>
+        <li>email address (newsletter),</li>
+        <li>content of queries sent to the MCP server,</li>
+        <li>technical data (including IP address, used temporarily to rate-limit requests),</li>
+        <li>data from analytics tools.</li>
+      </ul>
+
+      <h2>4. Recipients and processors</h2>
+      <h3>Web3Forms</h3>
+      <p>A service operated by Web3Creative, based in India — receiving, validating, storing and forwarding form submissions, as well as spam filtering. Web3Creative uses subprocessors, including:</p>
+      <ul>
+        <li>Amazon Web Services (hosting, email and storage — USA / regions according to configuration),</li>
+        <li>Hetzner Online GmbH (infrastructure — EU: Germany/Finland),</li>
+        <li>Cloudflare (CDN/security — globally),</li>
+        <li>CleanTalk and Akismet anti-spam services (receive IP address and email address — USA).</li>
+      </ul>
+      <p>Legal safeguards: a data processing agreement (DPA) and standard contractual clauses (SCCs). Policy: <a href="https://web3forms.com/privacy" target="_blank" rel="noopener">web3forms.com/privacy</a>.</p>
+      <h3>OpenAI</h3>
+      <p>For semantic legal search, the content of a query sent to the MCP server is sent to OpenAI to create a vector embedding. OpenAI acts as a processor. Under OpenAI’s API terms, API data is not used to train models. Details of processing by OpenAI: <a href="https://openai.com/policies/" target="_blank" rel="noopener">openai.com/policies</a>.</p>
+      <h3>Other recipients</h3>
+      <ul>
+        <li><strong>Zoho</strong> (Zoho Corporation) — newsletter delivery and email handling; email address retained until consent is withdrawn.</li>
+        <li><strong>Google</strong> (Google Analytics), <strong>Cloudflare</strong>, <strong>GitHub</strong> (hosting).</li>
+      </ul>
+
+      <h2>5. Transfers outside the EEA</h2>
+      <p>Data may be transferred outside the European Economic Area:</p>
+      <ul>
+        <li>Web3Creative / Web3Forms (India),</li>
+        <li>OpenAI, AWS, CleanTalk, Akismet, Zoho, Google, Cloudflare, GitHub (USA).</li>
+      </ul>
+      <p>Transfer safeguards: standard contractual clauses (SCCs) / the Data Privacy Framework.</p>
+
+      <h2>6. Retention period</h2>
+      <ul>
+        <li>Web3Forms submissions — technical retention for up to 3 years (visible in the dashboard for up to 30 days on the free plan),</li>
+        <li>newsletter email address — until consent is withdrawn,</li>
+        <li>Google Analytics data — according to the service settings (2–14 months),</li>
+        <li>MCP-server query content — not retained beyond standard, short-lived technical logs,</li>
+        <li>hosting and security technical logs — retained by Cloudflare and GitHub in accordance with their policies.</li>
+      </ul>
+
+      <h2>7. Your rights</h2>
+      <p>You have the right to access, rectify, erase, restrict processing of and port your data, to object, and to withdraw consent at any time (without affecting the lawfulness of processing before withdrawal).</p>
+      <p>You also have the right to lodge a complaint with the supervisory authority — the <strong>President of the Personal Data Protection Office (PUODO)</strong>.</p>
+
+      <h2>8. Providing data is voluntary</h2>
+      <p>Providing data is voluntary. If you do not provide an email address, you simply will not be able to receive the newsletter. Using the MCP server requires sending the content of your query; do not send through the search tool any data that you do not wish to share with an external AI provider.</p>
+
+      <h2>9. Privacy of the MCP server</h2>
+      <p>We do not create accounts, require sign-in or build profiles of MCP-server users. An IP address is processed temporarily and solely to rate-limit requests, protecting the service against abuse.</p>
+      <p>The MCP server processes the content of your queries solely to return relevant legislation. For semantic search, your query content is sent to OpenAI’s embedding service to be converted into a vector. Data is transferred to the USA under standard contractual clauses or the Data Privacy Framework.</p>
+
+      <div class="callout">
+        <strong>Withdrawing consent</strong><br>
+        You can withdraw consent for analytics at any time through <a href="#" onclick="nalegaluOpenConsent();return false;">cookie settings</a>. You can withdraw newsletter consent by writing to <a href="mailto:asia@nalegalu.org">asia@nalegalu.org</a> or using the unsubscribe link in the message.
+      </div>
     </div>
   </main>
 
@@ -135,12 +227,30 @@
     <div class="foot-inner">
       <span>© nalegalu.org</span>
       <nav class="foot-links" aria-label="Stopka">
-        <a href="index.html">Strona główna</a>
-        <a href="polityka-prywatnosci.html">Polityka prywatności</a>
-        <a href="polityka-cookies.html">Polityka cookies</a>
-        <a href="#" onclick="nalegaluOpenConsent();return false;">Ustawienia cookies</a>
+        <a href="index.html" data-pl="Strona główna" data-en="Home">Strona główna</a>
+        <a href="polityka-prywatnosci.html" data-pl="Polityka prywatności" data-en="Privacy policy">Polityka prywatności</a>
+        <a href="polityka-cookies.html" data-pl="Polityka cookies" data-en="Cookie policy">Polityka cookies</a>
+        <a href="#" onclick="nalegaluOpenConsent();return false;" data-pl="Ustawienia cookies" data-en="Cookie settings">Ustawienia cookies</a>
       </nav>
     </div>
   </footer>
+  <script>
+    const languageSwitch = document.getElementById('languageSwitch');
+    const contentPl = document.getElementById('contentPl');
+    const contentEn = document.getElementById('contentEn');
+
+    languageSwitch.addEventListener('click', () => {
+      const showEnglish = contentEn.hidden;
+      contentPl.hidden = showEnglish;
+      contentEn.hidden = !showEnglish;
+      document.documentElement.lang = showEnglish ? 'en' : 'pl';
+      document.title = showEnglish ? 'Privacy policy - nalegalu.org' : 'Polityka prywatności - nalegalu.org';
+      languageSwitch.textContent = showEnglish ? 'Polski' : 'English';
+      languageSwitch.setAttribute('aria-pressed', String(showEnglish));
+      document.querySelectorAll('[data-pl][data-en]').forEach((element) => {
+        element.textContent = showEnglish ? element.dataset.en : element.dataset.pl;
+      });
+    });
+  </script>
 </body>
 </html>
