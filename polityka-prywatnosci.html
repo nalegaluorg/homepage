@@ -88,7 +88,7 @@
     <h2>3. Zakres danych</h2>
     <ul>
       <li>adres e-mail (newsletter),</li>
-      <li>treść zapytań przesyłanych do serwera MCP,</li>
+      <li>dane przekazane w wywołaniu narzędzia MCP, w tym treść zapytania prawnego, oznaczenie aktu lub artykułu, sygnatura sprawy, identyfikator orzeczenia, cytowany fragment i parametry wyszukiwania,</li>
       <li>dane techniczne (m.in. adres IP, wykorzystywany doraźnie do limitowania liczby zapytań),</li>
       <li>dane z narzędzi analitycznych.</li>
     </ul>
@@ -124,7 +124,7 @@
       <li>zgłoszenia w Web3Forms — techniczny czas przechowywania do 3 lat (widoczność w panelu do 30 dni w planie darmowym),</li>
       <li>adres e-mail do newslettera — do wycofania zgody,</li>
       <li>dane w Google Analytics — zgodnie z ustawieniami usługi (2–14 miesięcy),</li>
-      <li>treść zapytań do serwera MCP — nie jest przechowywana poza standardowymi, krótkotrwałymi logami technicznymi,</li>
+      <li>treść wywołań narzędzi MCP — nie jest zapisywana w aplikacji ani w trwałej pamięci podręcznej; adres IP służący limitowaniu zapytań wygasa po maksymalnie 60 sekundach,</li>
       <li>logi techniczne hostingu i zabezpieczeń — przez Cloudflare i GitHub zgodnie z ich politykami.</li>
     </ul>
 
@@ -133,11 +133,16 @@
     <p>Masz również prawo wniesienia skargi do organu nadzorczego — <strong>Prezesa Urzędu Ochrony Danych Osobowych (PUODO)</strong>.</p>
 
     <h2>8. Dobrowolność podania danych</h2>
-    <p>Podanie danych jest dobrowolne. Brak podania adresu e-mail oznacza jedynie brak możliwości otrzymywania newslettera. Korzystanie z serwera MCP wymaga przekazania treści zapytania; nie wysyłaj przez wyszukiwarkę danych, których nie chcesz przekazać zewnętrznemu dostawcy AI.</p>
+    <p>Podanie danych jest dobrowolne. Brak podania adresu e-mail oznacza jedynie brak możliwości otrzymywania newslettera. Korzystanie z serwera MCP wymaga przekazania danych niezbędnych do wykonania wybranego narzędzia; nie wysyłaj przez MCP danych szczególnych kategorii ani informacji, których nie chcesz przekazać zewnętrznemu dostawcy AI.</p>
 
     <h2>9. Prywatność serwera MCP</h2>
-    <p>Nie tworzymy kont, nie wymagamy logowania i nie budujemy profili użytkowników serwera MCP. Adres IP jest przetwarzany doraźnie wyłącznie do limitowania liczby zapytań, aby chronić usługę przed nadużyciem.</p>
-    <p>Serwer MCP przetwarza treść Twoich zapytań wyłącznie po to, by zwrócić trafne przepisy. Aby wyszukiwać semantycznie, treść zapytania jest wysyłana do OpenAI (usługa embeddingów) w celu zamiany na wektor. Dane są przekazywane do USA na podstawie standardowych klauzul umownych lub Data Privacy Framework.</p>
+    <p>Serwer MCP Nalegalu przetwarza dane przekazane w wywołaniu narzędzia wyłącznie w celu wykonania żądanej funkcji. Zależnie od użytego narzędzia mogą to być: treść zapytania prawnego, oznaczenie aktu lub artykułu, sygnatura sprawy, identyfikator orzeczenia, cytowany fragment oraz parametry wyszukiwania.</p>
+    <p>W przypadku narzędzia <code>search_law</code> wyłącznie treść zapytania jest przekazywana do OpenAI API w celu utworzenia wektora wyszukiwania. Nie przekazujemy do OpenAI pozostałych parametrów wyszukiwania ani wyników. Dane przesłane przez API nie są wykorzystywane do trenowania modeli OpenAI, chyba że administrator konta API wyraźnie wybierze udostępnianie danych. Standardowo OpenAI może przechowywać treść i metadane w logach monitorowania nadużyć przez okres do 30 dni. Szczegóły: <a href="https://developers.openai.com/api/docs/guides/your-data#default-usage-policies-by-endpoint" target="_blank" rel="noopener">OpenAI — Data controls</a>.</p>
+    <p>Serwer nie tworzy kont użytkowników, nie wymaga logowania, nie prowadzi historii wyszukiwań, nie stosuje reklam, analityki zachowań ani profilowania. Treść wywołań narzędzi nie jest zapisywana w aplikacji ani w trwałej pamięci podręcznej.</p>
+    <p>Adres IP jest przetwarzany wyłącznie w pamięci serwera na potrzeby limitowania nadużyć; wpis wygasa po maksymalnie 60 sekundach. Nie prowadzimy logów dostępu HTTP po stronie Caddy ani aplikacji MCP. Ograniczone logi diagnostyczne kontenera są rotowane po osiągnięciu łącznego limitu 30 MiB i nie służą do rejestrowania treści wywołań narzędzi.</p>
+    <p>Dostawcami uczestniczącymi w obsłudze serwera są: Cloudflare (sieć i zabezpieczenia połączenia), OpenAI (embeddingi dla <code>search_law</code>) oraz MIKR.US (operator infrastruktury VPS). Przy narzędziach pobierających publiczne orzecznictwo zapytanie może zostać skierowane do systemu SAOS. Qdrant działa jako komponent infrastruktury serwera i nie jest odrębnym zewnętrznym odbiorcą danych.</p>
+    <p>Podstawą przetwarzania jest prawnie uzasadniony interes administratora (art. 6 ust. 1 lit. f RODO): wykonanie żądanego wyszukiwania, zapewnienie bezpieczeństwa usługi oraz przeciwdziałanie nadużyciom. Dane mogą być przekazywane poza EOG w związku z korzystaniem z Cloudflare i OpenAI. Informacje o podstawach transferów i środkach ochrony stosowanych przez tych dostawców znajdują się w ich politykach prywatności oraz dokumentacji umownej.</p>
+    <p>Osobom, których dane dotyczą, przysługują prawa opisane w niniejszej Polityce prywatności, w tym prawo dostępu, sprostowania, usunięcia, ograniczenia przetwarzania, sprzeciwu oraz złożenia skargi do PUODO. W sprawach dotyczących MCP można skontaktować się z administratorem pod adresem: <a href="mailto:asia@nalegalu.org">asia@nalegalu.org</a>.</p>
 
     <div class="callout">
       <strong>Wycofanie zgody</strong><br>
@@ -165,7 +170,7 @@
       <h2>3. Categories of data</h2>
       <ul>
         <li>email address (newsletter),</li>
-        <li>content of queries sent to the MCP server,</li>
+        <li>data supplied in an MCP tool call, including legal-query content, an act or article reference, case signature, judgment identifier, quoted excerpt and search parameters,</li>
         <li>technical data (including IP address, used temporarily to rate-limit requests),</li>
         <li>data from analytics tools.</li>
       </ul>
@@ -201,7 +206,7 @@
         <li>Web3Forms submissions — technical retention for up to 3 years (visible in the dashboard for up to 30 days on the free plan),</li>
         <li>newsletter email address — until consent is withdrawn,</li>
         <li>Google Analytics data — according to the service settings (2–14 months),</li>
-        <li>MCP-server query content — not retained beyond standard, short-lived technical logs,</li>
+        <li>MCP tool-call content — not stored in the application or persistent cache; the IP-address entry used for rate limiting expires after no more than 60 seconds,</li>
         <li>hosting and security technical logs — retained by Cloudflare and GitHub in accordance with their policies.</li>
       </ul>
 
@@ -210,11 +215,16 @@
       <p>You also have the right to lodge a complaint with the supervisory authority — the <strong>President of the Personal Data Protection Office (PUODO)</strong>.</p>
 
       <h2>8. Providing data is voluntary</h2>
-      <p>Providing data is voluntary. If you do not provide an email address, you simply will not be able to receive the newsletter. Using the MCP server requires sending the content of your query; do not send through the search tool any data that you do not wish to share with an external AI provider.</p>
+      <p>Providing data is voluntary. If you do not provide an email address, you simply will not be able to receive the newsletter. Using the MCP server requires providing the data needed to run the selected tool; do not send special-category data or any information that you do not wish to share with an external AI provider.</p>
 
       <h2>9. Privacy of the MCP server</h2>
-      <p>We do not create accounts, require sign-in or build profiles of MCP-server users. An IP address is processed temporarily and solely to rate-limit requests, protecting the service against abuse.</p>
-      <p>The MCP server processes the content of your queries solely to return relevant legislation. For semantic search, your query content is sent to OpenAI’s embedding service to be converted into a vector. Data is transferred to the USA under standard contractual clauses or the Data Privacy Framework.</p>
+      <p>The Nalegalu MCP server processes data supplied in a tool call solely to perform the requested function. Depending on the tool used, this may include legal-query content, an act or article reference, case signature, judgment identifier, quoted excerpt and search parameters.</p>
+      <p>For the <code>search_law</code> tool, only the query content is sent to the OpenAI API to create a search vector. We do not send other search parameters or results to OpenAI. Data submitted through the API is not used to train OpenAI models unless the API-account administrator explicitly opts in to data sharing. By default, OpenAI may retain content and metadata in abuse-monitoring logs for up to 30 days. Details: <a href="https://developers.openai.com/api/docs/guides/your-data#default-usage-policies-by-endpoint" target="_blank" rel="noopener">OpenAI — Data controls</a>.</p>
+      <p>The server does not create user accounts, require sign-in, retain search history, or use advertising, behavioural analytics or profiling. Tool-call content is not stored in the application or in a persistent cache.</p>
+      <p>An IP address is processed only in server memory for abuse rate limiting; the entry expires after no more than 60 seconds. We do not keep HTTP access logs in Caddy or the MCP application. Limited container diagnostic logs are rotated once their combined size reaches 30 MiB and are not used to record tool-call content.</p>
+      <p>Providers involved in operating the server are Cloudflare (network and connection security), OpenAI (embeddings for <code>search_law</code>) and MIKR.US (VPS infrastructure operator). For tools retrieving public case law, a request may be directed to the SAOS system. Qdrant operates as a server-infrastructure component and is not a separate external recipient of data.</p>
+      <p>Processing is based on the controller’s legitimate interest (Article 6(1)(f) GDPR): performing the requested search, ensuring service security and preventing abuse. Data may be transferred outside the EEA in connection with Cloudflare and OpenAI. Information about transfer safeguards and protective measures used by these providers is available in their privacy policies and contractual documentation.</p>
+      <p>Data subjects have the rights described in this Privacy Policy, including access, rectification, erasure, restriction of processing, objection and the right to lodge a complaint with PUODO. For matters concerning the MCP server, contact the controller at <a href="mailto:asia@nalegalu.org">asia@nalegalu.org</a>.</p>
 
       <div class="callout">
         <strong>Withdrawing consent</strong><br>
