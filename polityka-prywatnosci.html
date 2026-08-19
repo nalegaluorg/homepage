@@ -72,7 +72,7 @@
     <div class="breadcrumb"><a href="index.html">nalegalu.org</a> › <span>Polityka prywatności</span></div>
     <h1>Polityka prywatności</h1>
     <p class="lead">Informacja o przetwarzaniu danych osobowych zgodnie z art. 13 RODO (Rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679).</p>
-    <p class="updated">Data ostatniej aktualizacji: 13 sierpnia 2026 r.</p>
+    <p class="updated">Data ostatniej aktualizacji: 19 sierpnia 2026 r.</p>
 
     <h2>1. Administrator danych</h2>
     <p>Administratorem danych osobowych jest <strong>Joanna Karpińska</strong>, z siedzibą w Warszawie. Kontakt w sprawach danych osobowych: <a href="mailto:asia@nalegalu.org">asia@nalegalu.org</a>.</p>
@@ -105,6 +105,10 @@
     <p>Podstawa: umowa powierzenia (DPA) oraz standardowe klauzule umowne (SCC). Polityka: <a href="https://web3forms.com/privacy" target="_blank" rel="noopener">https://web3forms.com/privacy</a>.</p>
     <h3>OpenAI</h3>
     <p>W celu semantycznego wyszukiwania przepisów treść zapytania przesłanego do serwera MCP jest wysyłana do OpenAI w celu utworzenia wektora (embeddingu). OpenAI występuje jako podmiot przetwarzający. Zgodnie z warunkami API OpenAI dane z API nie są wykorzystywane do trenowania modeli. Szczegóły przetwarzania po stronie OpenAI: <a href="https://openai.com/policies/" target="_blank" rel="noopener">openai.com/policies</a>.</p>
+    <h3>Grafana Labs / Grafana Cloud</h3>
+    <p>W celu monitorowania produkcyjnego serwera MCP korzystamy z Grafana Cloud, usługi Grafana Labs, jako podmiotu przetwarzającego dane techniczne i operacyjne. Celem przetwarzania jest zapewnienie dostępności i bezpieczeństwa usługi, monitorowanie wydajności, wykrywanie błędów i nadużyć oraz diagnostyka awarii. Podstawą przetwarzania jest prawnie uzasadniony interes administratora (art. 6 ust. 1 lit. f RODO).</p>
+    <p>Do Grafana Cloud przekazujemy wyłącznie zagregowane metryki liczbowe, etykiety techniczne o ograniczonym i zamkniętym zbiorze wartości oraz krótkotrwałe logi diagnostyczne procesu MCP. Dane te nie zawierają treści zapytań użytkowników, adresów IP, identyfikatorów sesji, adresów aktów, treści prawnych ani danych kont użytkowników. Caddy access logging jest wyłączony, a Alloy zbiera dane wyłącznie z kontenera MCP, nie z kontenera Caddy.</p>
+    <p>Warunki przetwarzania danych przez Grafana Labs, w tym ewentualne okresy retencji i zasady dotyczące lokalizacji danych, wynikają z aktualnej konfiguracji usługi oraz warunków Grafana Labs: <a href="https://grafana.com/legal/privacy-policy/" target="_blank" rel="noopener">Polityka prywatności Grafana Labs</a> i <a href="https://grafana.com/legal/data-processing-agreement/" target="_blank" rel="noopener">Data Processing Agreement Grafana Labs</a>.</p>
     <h3>Pozostali odbiorcy</h3>
     <ul>
       <li><strong>Zoho</strong> (Zoho Corporation) — wysyłka newslettera i obsługa poczty; adres e-mail przechowywany do czasu wycofania zgody.</li>
@@ -125,7 +129,7 @@
       <li>adres e-mail do newslettera — do wycofania zgody,</li>
       <li>dane w Google Analytics — zgodnie z ustawieniami usługi (2–14 miesięcy),</li>
       <li>treść wywołań narzędzi MCP — nie jest zapisywana w aplikacji ani w trwałej pamięci podręcznej; adres IP służący limitowaniu zapytań wygasa po maksymalnie 60 sekundach,</li>
-      <li>logi techniczne hostingu i zabezpieczeń — przez Cloudflare i GitHub zgodnie z ich politykami.</li>
+      <li>logi techniczne hostingu i zabezpieczeń — przez Cloudflare i GitHub zgodnie z ich politykami; dane telemetryczne MCP przekazywane do Grafana Cloud — zgodnie z aktualną konfiguracją usługi oraz warunkami Grafana Labs.</li>
     </ul>
 
     <h2>7. Twoje prawa</h2>
@@ -142,6 +146,7 @@
     <p>Adres IP jest przetwarzany wyłącznie w pamięci serwera na potrzeby limitowania nadużyć; wpis wygasa po maksymalnie 60 sekundach. Nie prowadzimy logów dostępu HTTP po stronie Caddy ani aplikacji MCP. Ograniczone logi diagnostyczne kontenera są rotowane po osiągnięciu łącznego limitu 30 MiB i nie służą do rejestrowania treści wywołań narzędzi.</p>
     <p>Dostawcami uczestniczącymi w obsłudze serwera są: Cloudflare (sieć i zabezpieczenia połączenia), OpenAI (embeddingi dla <code>search_law</code>) oraz MIKR.US (operator infrastruktury VPS). Przy narzędziach pobierających publiczne orzecznictwo zapytanie może zostać skierowane do systemu SAOS. Qdrant działa jako komponent infrastruktury serwera i nie jest odrębnym zewnętrznym odbiorcą danych.</p>
     <p>Podstawą przetwarzania jest prawnie uzasadniony interes administratora (art. 6 ust. 1 lit. f RODO): wykonanie żądanego wyszukiwania, zapewnienie bezpieczeństwa usługi oraz przeciwdziałanie nadużyciom. Dane mogą być przekazywane poza EOG w związku z korzystaniem z Cloudflare i OpenAI. Informacje o podstawach transferów i środkach ochrony stosowanych przez tych dostawców znajdują się w ich politykach prywatności oraz dokumentacji umownej.</p>
+    <p>W celu zapewnienia dostępności, bezpieczeństwa i jakości działania serwera MCP korzystamy z Grafana Cloud (Grafana Labs). Do tego dostawcy przekazujemy wyłącznie zagregowane metryki operacyjne oraz ograniczone logi diagnostyczne. Metryki i logi nie zawierają treści zapytań, adresów IP, identyfikatorów sesji ani treści dokumentów prawnych.</p>
     <p>Osobom, których dane dotyczą, przysługują prawa opisane w niniejszej Polityce prywatności, w tym prawo dostępu, sprostowania, usunięcia, ograniczenia przetwarzania, sprzeciwu oraz złożenia skargi do PUODO. W sprawach dotyczących MCP można skontaktować się z administratorem pod adresem: <a href="mailto:asia@nalegalu.org">asia@nalegalu.org</a>.</p>
 
     <div class="callout">
@@ -154,7 +159,7 @@
       <div class="breadcrumb"><a href="index.html">nalegalu.org</a> › <span>Privacy policy</span></div>
       <h1>Privacy policy</h1>
       <p class="lead">Information on the processing of personal data in accordance with Article 13 of the GDPR (Regulation (EU) 2016/679 of the European Parliament and of the Council).</p>
-      <p class="updated">Last updated: 13 August 2026.</p>
+      <p class="updated">Last updated: 19 August 2026.</p>
 
       <h2>1. Data controller</h2>
       <p>The controller of your personal data is <strong>Joanna Karpińska</strong>, based in Warsaw. For matters concerning personal data, contact: <a href="mailto:asia@nalegalu.org">asia@nalegalu.org</a>.</p>
@@ -187,6 +192,10 @@
       <p>Legal safeguards: a data processing agreement (DPA) and standard contractual clauses (SCCs). Policy: <a href="https://web3forms.com/privacy" target="_blank" rel="noopener">web3forms.com/privacy</a>.</p>
       <h3>OpenAI</h3>
       <p>For semantic legal search, the content of a query sent to the MCP server is sent to OpenAI to create a vector embedding. OpenAI acts as a processor. Under OpenAI’s API terms, API data is not used to train models. Details of processing by OpenAI: <a href="https://openai.com/policies/" target="_blank" rel="noopener">openai.com/policies</a>.</p>
+      <h3>Grafana Labs / Grafana Cloud</h3>
+      <p>For production monitoring of the MCP server, we use Grafana Cloud, a Grafana Labs service, as a processor of technical and operational data. Processing is used to ensure service availability and security, monitor performance, detect errors and abuse, and diagnose outages. The legal basis is the controller’s legitimate interest (Article 6(1)(f) GDPR).</p>
+      <p>We send Grafana Cloud only aggregated numerical metrics, technical labels with a limited and closed set of values, and short-lived diagnostic logs from the MCP process. This data does not contain user-query content, IP addresses, session identifiers, legal-act references, legal content or user-account data. Caddy access logging is disabled, and Alloy collects data only from the MCP container, not the Caddy container.</p>
+      <p>Grafana Labs’ processing terms, including any retention periods and rules on data location, depend on the current service configuration and Grafana Labs’ terms: <a href="https://grafana.com/legal/privacy-policy/" target="_blank" rel="noopener">Grafana Labs Privacy Policy</a> and <a href="https://grafana.com/legal/data-processing-agreement/" target="_blank" rel="noopener">Grafana Labs Data Processing Agreement</a>.</p>
       <h3>Other recipients</h3>
       <ul>
         <li><strong>Zoho</strong> (Zoho Corporation) — newsletter delivery and email handling; email address retained until consent is withdrawn.</li>
@@ -207,7 +216,7 @@
         <li>newsletter email address — until consent is withdrawn,</li>
         <li>Google Analytics data — according to the service settings (2–14 months),</li>
         <li>MCP tool-call content — not stored in the application or persistent cache; the IP-address entry used for rate limiting expires after no more than 60 seconds,</li>
-        <li>hosting and security technical logs — retained by Cloudflare and GitHub in accordance with their policies.</li>
+        <li>hosting and security technical logs — retained by Cloudflare and GitHub in accordance with their policies; MCP telemetry sent to Grafana Cloud — in accordance with the current service configuration and Grafana Labs’ terms.</li>
       </ul>
 
       <h2>7. Your rights</h2>
@@ -224,6 +233,7 @@
       <p>An IP address is processed only in server memory for abuse rate limiting; the entry expires after no more than 60 seconds. We do not keep HTTP access logs in Caddy or the MCP application. Limited container diagnostic logs are rotated once their combined size reaches 30 MiB and are not used to record tool-call content.</p>
       <p>Providers involved in operating the server are Cloudflare (network and connection security), OpenAI (embeddings for <code>search_law</code>) and MIKR.US (VPS infrastructure operator). For tools retrieving public case law, a request may be directed to the SAOS system. Qdrant operates as a server-infrastructure component and is not a separate external recipient of data.</p>
       <p>Processing is based on the controller’s legitimate interest (Article 6(1)(f) GDPR): performing the requested search, ensuring service security and preventing abuse. Data may be transferred outside the EEA in connection with Cloudflare and OpenAI. Information about transfer safeguards and protective measures used by these providers is available in their privacy policies and contractual documentation.</p>
+      <p>To ensure the availability, security and quality of the MCP server, we use Grafana Cloud (Grafana Labs). We send this provider only aggregated operational metrics and limited diagnostic logs. The metrics and logs do not contain query content, IP addresses, session identifiers or legal-document content.</p>
       <p>Data subjects have the rights described in this Privacy Policy, including access, rectification, erasure, restriction of processing, objection and the right to lodge a complaint with PUODO. For matters concerning the MCP server, contact the controller at <a href="mailto:asia@nalegalu.org">asia@nalegalu.org</a>.</p>
 
       <div class="callout">
