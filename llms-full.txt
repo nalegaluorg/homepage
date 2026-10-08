@@ -8,7 +8,7 @@ Ten plik zawiera pełniejszy opis projektu nalegalu.org przeznaczony do odczytu 
 
 Polskie prawo jest publiczne, ale ukryte w plikach PDF i nieporęcznych stronach rządowych. nalegalu pobiera całe polskie prawodawstwo i orzecznictwo, a następnie udostępnia je w nowoczesnej, ustrukturyzowanej postaci: gotowej do przeszukiwania, cytowania i integracji z narzędziami AI, z których korzystają prawnicy i obywatele.
 
-Kiedy zadajesz AI pytanie prawne, model powinien cytować konkretny artykuł z obowiązującej ustawy, a nie domyślać się treści przepisów. nalegalu dostarcza warstwę danych, która to umożliwia: prawdziwą, aktualną i otwartą.
+Kiedy zadajesz AI pytanie prawne, model powinien cytować konkretny artykuł z obowiązującej ustawy, a nie domyślać się treści przepisów. nalegalu dostarcza warstwę danych, która to umożliwia: sprawdzalną i otwartą.
 
 nalegalu.org to wyłącznie publiczna strona projektu. Dane i narzędzia znajdują się w osobnym repozytorium: https://github.com/nalegaluorg/nalegalu
 
@@ -17,11 +17,11 @@ nalegalu.org to wyłącznie publiczna strona projektu. Dane i narzędzia znajduj
 - Wszystkie akty prawne: ponad 5 700 ustaw, rozporządzeń i obwieszczeń z lat 1918–2025, pobrane z Dziennika Ustaw i ISAP, ze znormalizowaną strukturą.
 - Orzecznictwo sądowe: ponad 824 000 orzeczeń z bazy SAOS, od Trybunału Konstytucyjnego po sądy okręgowe, powiązanych z konkretnymi artykułami ustaw. Każde orzeczenie ma score ważności — wyroki TK i uchwały SN na górze, orzeczenia pomocnicze na dole.
 - Otwarte licencje: wszystkie dane na licencji CC0, bez ograniczeń — można je pobierać, używać, modyfikować i dystrybuować w dowolnym celu, komercyjnym lub nie.
-- Automatyczna aktualizacja: zmiany w prawie odzwierciedlają się w danych automatycznie, dzięki czemu narzędzia AI pracują na aktualnym stanie prawnym.
+- Historia zmian: zmiany danych są widoczne w historii commitów repozytorium na GitHubie.
 
 ## Serwer MCP (Nalegalu MCP)
 
-MCP (Model Context Protocol) to otwarty standard łączenia asystentów AI z zewnętrznymi narzędziami. nalegalu udostępnia publiczny, hostowany serwer MCP, który daje modelowi semantyczną wyszukiwarkę obowiązujących ustaw i dekretów oraz dostęp do powiązanego orzecznictwa. Zamiast pobierać pliki, asystent AI odpytuje prawo w czasie rzeczywistym i cytuje konkretny artykuł — z odnośnikiem do źródła.
+MCP (Model Context Protocol) to otwarty standard łączenia asystentów AI z zewnętrznymi narzędziami. nalegalu udostępnia publiczny, hostowany serwer MCP, który daje modelowi semantyczną wyszukiwarkę obowiązujących ustaw i dekretów oraz dostęp do powiązanego orzecznictwa. Zamiast pobierać pliki, asystent AI odpytuje bazę danych nalegalu i cytuje konkretny artykuł — z odnośnikiem do źródła.
 
 - Endpoint: https://mcp.nalegalu.org/mcp
 - Transport: streamable HTTP, bez uwierzytelniania, bez klucza API.
@@ -45,7 +45,7 @@ Prywatność MCP: aby wyszukiwać semantycznie, treść zapytania jest wysyłana
 
 - Markdown / AI-ready: ustrukturyzowane pliki Markdown z metadanymi, wzajemnymi odniesieniami między aktami i orzecznictwem. Gotowe do RAG, fine-tuningu i okien kontekstowych LLM. Dostępne: CSV per artykuł, JSON metadata, cross-references, scoring orzeczeń. Pobierz z GitHub: https://github.com/nalegaluorg/nalegalu
 - Podcast / audio: najważniejsze akty prawne w formie audio (MP3, RSS), z myślą o dostępności. Apple Podcasts: https://podcasts.apple.com/us/podcast/nalegalu/id1892974960 — Spotify: https://open.spotify.com/show/1HFNYVb5Md7ndxLxFkuGfz
-- MCP / wyszukiwarka na żywo: hostowany serwer MCP (opis wyżej).
+- MCP / wyszukiwarka: hostowany serwer MCP (opis wyżej).
 - Społeczność (wkrótce): planowana prywatna społeczność Discord wokół praktycznego wykorzystania AI w prawie i compliance — prompty, case studies, AI governance.
 
 ## Dokumentacja
